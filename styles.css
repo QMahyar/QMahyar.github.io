@@ -405,6 +405,8 @@ section > h2 {
 .tag-py   { color: var(--yellow);  border-color: rgba(255, 238, 88, 0.4); }
 .tag-lua  { color: var(--magenta); border-color: rgba(224, 64, 208, 0.4); }
 
+.stars { color: var(--yellow); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+
 .status {
   font-size: 0.7rem;
   padding: 2px 8px;
@@ -469,6 +471,24 @@ section > h2 {
 .recent li:first-child { border-top: 1px solid var(--border); }
 .recent li:hover { background: var(--panel); }
 .recent .when { color: var(--muted); font-size: 0.8rem; flex-shrink: 0; }
+
+.recent .starred-main { min-width: 0; }
+.recent .starred-desc {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60ch;
+}
+.recent .starred-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.recent .owner { color: var(--muted); font-size: 0.78rem; }
 
 /* ── Contact ─────────────────────────────────────────────── */
 

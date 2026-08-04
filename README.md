@@ -4,21 +4,40 @@ Personal site — plain HTML/CSS/JS, no build step. Served from this repo via Gi
 
 **URL:** https://QMahyar.github.io
 
-## Sections
+## Everything is automatic
 
-- `~/about` — bio + live GitHub metrics (repos, stars, followers, following, joined) and ASCII language bars, fetched from the GitHub API on load
-- `~/projects` — all projects, grouped; ✦ = featured with feature highlights; the grep box filters them live
-- `~/stack` — languages, platforms, areas
-- `~/recent` — 5 most recently pushed repos (live from the API)
-- `~/contact` — links
-- **Command palette** — press `/` or `Ctrl+K` anywhere; `help` lists commands
+The page fetches from the GitHub API on every load:
 
-## Edit
+- `~/projects` — rendered from your repos: new repos appear automatically, stars, status (active/archived), language tags, npm links
+- `~/starred` — repos you've starred on GitHub (top 8, by stars)
+- `~/recent` — 5 most recently pushed repos
+- metrics (repos / followers / following / joined) and language bars
+- hero `ls ~/projects` count + the `ls` command in the palette
 
-- `index.html` — content. Projects live in `#projects`; copy/delete an `<article class="project">` block to add/remove one. `data-name`/`data-tags` feed the grep filter.
-- `styles.css` — design tokens (Campbell-Vivid palette from `wezterm.lua`) at the top under `:root`.
-- `script.js` — typewriter script, API fetching, grep filter, and `PALETTE` commands.
-- `404.html` — custom not-found page.
+If the API is unreachable it falls back to static data baked into `script.js`.
+
+## Curating — edit the CONFIG block at the top of `script.js`
+
+```js
+exclude:  ["QMahyar", "QMahyar.github.io"],   // repos hidden from ~/projects
+hideForks: true,                              // forks never shown
+featured: ["Telegram-Cli", ...],              // ✦ + highlights
+highlights: { "<repo>": ["bullet", ...] },    // feature bullets for featured repos
+describe:  { "<repo>": "custom description" },// optional description overrides
+links:     { "<repo>": {label, url} },        // extra links (npm is auto)
+groups:    [ { name, match: [keywords] } ],   // ordering + grouping rules
+starredLimit: 8,                              // rows in ~/starred
+excludeStarred: ["owner/name"]                // hide specific starred repos
+```
+
+Add a repo → it shows up on the next page load. No HTML editing required.
+
+## Other files
+
+- `index.html` — page skeleton (hero, sections, palette overlay)
+- `styles.css` — design tokens (Campbell-Vivid palette from `wezterm.lua`) at the top under `:root`
+- `script.js` — CONFIG + all behavior
+- `404.html` — custom not-found page
 
 ## Deploy
 

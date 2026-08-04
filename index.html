@@ -38,6 +38,8 @@
     <a href="#about">~/about</a>
     <a href="#projects">~/projects</a>
     <a href="#stack">~/stack</a>
+    <a href="#recent">~/recent</a>
+    <a href="#starred">~/starred</a>
     <a href="#contact">~/contact</a>
   </nav>
   <button class="palette-hint" id="palette-hint" aria-label="Open command palette">press <kbd>/</kbd> for commands</button>
@@ -105,153 +107,9 @@
       <label for="filter"><span class="prompt" aria-hidden="true">$</span> grep -i</label>
       <input id="filter" type="text" placeholder="name, language, keyword…" autocomplete="off" spellcheck="false">
     </div>
-    <p class="filter-count" id="filter-count">9 projects</p>
-
-    <div class="project-group">
-      <h3>Telegram &amp; Messaging</h3>
-      <!-- #region telegram -->
-
-      <article class="project featured" data-name="telegram-cli" data-tags="go telegram mtproto cli">
-        <div class="project-main">
-          <h4>✦ <a href="https://github.com/QMahyar/Telegram-Cli" target="_blank" rel="noopener">Telegram-Cli</a></h4>
-          <p>Every account you own in one terminal — MTProto, spoken as a real user.</p>
-          <ul class="highlights">
-            <li>unified sync + offline search across all accounts</li>
-            <li>flood-aware cross-account broadcasts</li>
-            <li>schema-driven raw invoke gateway — new TL methods before any command</li>
-          </ul>
-          <p class="project-links"><a href="https://github.com/QMahyar/Telegram-Cli/releases" target="_blank" rel="noopener">releases →</a></p>
-        </div>
-        <div class="project-meta">
-          <span class="tag tag-go">Go</span>
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <article class="project featured" data-name="telemanager" data-tags="typescript telegram sessions manager web">
-        <div class="project-main">
-          <h4>✦ <a href="https://github.com/QMahyar/TeleManager" target="_blank" rel="noopener">TeleManager</a></h4>
-          <p>Local-first session manager for your own Telegram accounts — a local web app, nothing leaves your machine.</p>
-          <ul class="highlights">
-            <li>login, import &amp; export secured session backups</li>
-            <li>dialog discovery with local metadata cache</li>
-            <li>guarded action queues + recurring schedules</li>
-          </ul>
-          <p class="project-links"><a href="https://github.com/QMahyar/TeleManager/releases/latest" target="_blank" rel="noopener">releases →</a></p>
-        </div>
-        <div class="project-meta">
-          <span class="tag tag-ts">TypeScript</span>
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <article class="project" data-name="q-manager" data-tags="typescript telegram werewolf desktop electron">
-        <div class="project-main">
-          <h4><a href="https://github.com/QMahyar/Q-Manager" target="_blank" rel="noopener">Q-Manager</a></h4>
-          <p>Cross-platform desktop app for Telegram Werewolf game automation — multi-account management, phase detection, action automation.</p>
-        </div>
-        <div class="project-meta">
-          <span class="tag tag-ts">TypeScript</span>
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <!-- #endregion -->
-    </div>
-
-    <div class="project-group">
-      <h3>Networking &amp; Cloud</h3>
-      <!-- #region network -->
-
-      <article class="project featured" data-name="cloudflare-scanner" data-tags="go cloudflare warp xray network ip scanner">
-        <div class="project-main">
-          <h4>✦ <a href="https://github.com/QMahyar/Cloudflare-Scanner" target="_blank" rel="noopener">Cloudflare-Scanner</a></h4>
-          <p>Find working Cloudflare Warp endpoints and clean proxy IPs — fast, free, no setup.</p>
-          <ul class="highlights">
-            <li>scans from your own network — ranks by real performance</li>
-            <li>bundles xray-core for realistic validation</li>
-            <li>live results + batch apply to configs</li>
-            <li>Windows · Linux · macOS · Termux builds</li>
-          </ul>
-          <p class="project-links"><a href="https://github.com/QMahyar/Cloudflare-Scanner/releases/latest" target="_blank" rel="noopener">releases →</a></p>
-        </div>
-        <div class="project-meta">
-          <span class="tag tag-go">Go</span>
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <!-- #endregion -->
-    </div>
-
-    <div class="project-group">
-      <h3>Developer Tools</h3>
-      <!-- #region tools -->
-
-      <article class="project" data-name="cli-maker" data-tags="go cli generator sqlite">
-        <div class="project-main">
-          <h4><a href="https://github.com/QMahyar/cli-maker" target="_blank" rel="noopener">cli-maker</a></h4>
-          <p>CLI generator — produces Go CLIs from API docs with local SQLite caching and compound commands.</p>
-        </div>
-        <div class="project-meta">
-          <span class="tag tag-go">Go</span>
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <article class="project" data-name="pi-9router" data-tags="typescript pi extension gateway npm">
-        <div class="project-main">
-          <h4><a href="https://github.com/QMahyar/pi-9router" target="_blank" rel="noopener">pi-9router</a></h4>
-          <p>pi extension — multi-provider gateway for chat, image, speech, search &amp; fetch tools.</p>
-          <p class="project-links"><a href="https://www.npmjs.com/package/@qmahyar/pi-9router" target="_blank" rel="noopener">npm →</a></p>
-        </div>
-        <div class="project-meta">
-          <span class="tag tag-ts">TypeScript</span>
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <article class="project" data-name="pi-exa-search" data-tags="typescript pi extension search npm">
-        <div class="project-main">
-          <h4><a href="https://github.com/QMahyar/pi-exa-search" target="_blank" rel="noopener">pi-exa-search</a></h4>
-          <p>pi extension — semantic web search &amp; page fetch with multi-key rotation and highlights.</p>
-          <p class="project-links"><a href="https://www.npmjs.com/package/@qmahyar/pi-exa-search" target="_blank" rel="noopener">npm →</a></p>
-        </div>
-        <div class="project-meta">
-          <span class="tag tag-ts">TypeScript</span>
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <article class="project" data-name="pi-termux" data-tags="pi termux skill keys">
-        <div class="project-main">
-          <h4><a href="https://github.com/QMahyar/pi-termux" target="_blank" rel="noopener">pi-termux</a></h4>
-          <p>pi skill for Termux extra keys — layout configs, reference, macros.</p>
-        </div>
-        <div class="project-meta">
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <!-- #endregion -->
-    </div>
-
-    <div class="project-group">
-      <h3>Apps &amp; Configs</h3>
-      <!-- #region apps -->
-
-      <article class="project" data-name="wezterm-config" data-tags="lua wezterm terminal config windows">
-        <div class="project-main">
-          <h4><a href="https://github.com/QMahyar/wezterm-config" target="_blank" rel="noopener">wezterm-config</a></h4>
-          <p>Personal WezTerm configuration for Windows — the palette this site is built from.</p>
-        </div>
-        <div class="project-meta">
-          <span class="tag tag-lua">Lua</span>
-          <span class="status status-active">active</span>
-        </div>
-      </article>
-
-      <!-- #endregion -->
+    <p class="filter-count" id="filter-count" aria-live="polite">loading projects…</p>
+    <div id="projects-list">
+      <p class="subnote">fetching from the GitHub API…</p>
     </div>
   </section>
 
@@ -298,6 +156,13 @@
     <ul class="recent" id="recent-list">
       <li><a href="https://github.com/QMahyar/Telegram-Cli">Telegram-Cli</a> <span class="muted">— last push …</span></li>
     </ul>
+  </section>
+
+  <!-- ── Starred ────────────────────────────────────────────────── -->
+  <section id="starred" hidden>
+    <h2><span class="prompt" aria-hidden="true">$</span> ~/starred</h2>
+    <p class="subnote" id="starred-note">repos i&rsquo;ve starred on github — live</p>
+    <ul class="recent" id="starred-list"></ul>
   </section>
 
   <!-- ── Contact ────────────────────────────────────────────────── -->
