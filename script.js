@@ -224,7 +224,9 @@
       });
       var stars = own.reduce(function (a, r) { return a + r.stargazers_count; }, 0);
       var recent = own
-        .filter(function (r) { return r.pushed_at; })
+        .filter(function (r) {
+          return r.pushed_at && r.name !== "QMahyar" && r.name !== "QMahyar.github.io";
+        })
         .sort(function (a, b) { return new Date(b.pushed_at) - new Date(a.pushed_at); })
         .slice(0, 5)
         .map(function (r) {
