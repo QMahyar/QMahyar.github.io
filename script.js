@@ -86,6 +86,7 @@
         var o = document.createElement("span");
         o.className = "line out" + (line.cls ? " " + line.cls : "");
         o.textContent = line.out + "\n";
+        if (line.id) o.id = line.id;
         frag.appendChild(p);
         frag.appendChild(o);
       });
