@@ -4,11 +4,20 @@ Personal site — plain HTML/CSS/JS, no build step. Served from this repo via Gi
 
 **URL:** https://QMahyar.github.io
 
+## Sections
+
+- `~/about` — bio + live GitHub metrics (repos, stars, followers, following, joined) and ASCII language bars, fetched from the GitHub API on load
+- `~/projects` — all projects, grouped; ✦ = featured with feature highlights; the grep box filters them live
+- `~/stack` — languages, platforms, areas
+- `~/recent` — 5 most recently pushed repos (live from the API)
+- `~/contact` — links
+- **Command palette** — press `/` or `Ctrl+K` anywhere; `help` lists commands
+
 ## Edit
 
-- `index.html` — content. Projects live in `#projects`; copy/delete an `<article class="project">` block to add/remove one.
-- `styles.css` — design tokens (colors from the Campbell-Vivid terminal palette) at the top under `:root`.
-- `script.js` — the hero terminal typewriter.
+- `index.html` — content. Projects live in `#projects`; copy/delete an `<article class="project">` block to add/remove one. `data-name`/`data-tags` feed the grep filter.
+- `styles.css` — design tokens (Campbell-Vivid palette from `wezterm.lua`) at the top under `:root`.
+- `script.js` — typewriter script, API fetching, grep filter, and `PALETTE` commands.
 - `404.html` — custom not-found page.
 
 ## Deploy
