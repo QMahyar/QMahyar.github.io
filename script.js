@@ -101,7 +101,7 @@
 
   /* Static fallback (own repos only, forks excluded) */
   var FALLBACK = {
-    repos: 12, stars: 16, followers: 7, following: 14,
+    repos: 12, followers: 7, following: 14,
     joined: "2017",
     langs: [
       { name: "TypeScript", count: 4, color: "#4D8FFF" },
@@ -136,21 +136,15 @@
     return Math.floor(mo / 12) + "y ago";
   }
 
-  function fmt(n) {
-    return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n);
-  }
-
   function setMetrics(data) {
     var set = function (id, val) {
       var el = document.getElementById(id);
       if (el) el.textContent = val;
     };
     set("m-repos", data.repos);
-    set("m-stars", data.stars);
     set("m-followers", data.followers);
     set("m-following", data.following);
     set("m-joined", data.joined);
-    set("gh-line", data.repos + " repos · ★ " + data.stars);
     var tw = document.getElementById("tw-repos");
     if (tw && !reduceMotion) tw.textContent = data.repos;
   }
@@ -222,7 +216,6 @@
           color: LANG_COLORS[name.toLowerCase()] || "#8A8A8A"
         };
       });
-      var stars = own.reduce(function (a, r) { return a + r.stargazers_count; }, 0);
       var recent = own
         .filter(function (r) {
           return r.pushed_at && r.name !== "QMahyar" && r.name !== "QMahyar.github.io";
@@ -232,7 +225,7 @@
         .map(function (r) {
           return { name: r.name, url: r.html_url, when: relTime(r.pushed_at) };
         });
-      applyData({ repos: own.length, stars: stars, langs: langs, recent: recent });
+      applyData({ repos: own.length, langs: langs, recent: recent });
     })
     .catch(function () { applyData(FALLBACK); });
 
@@ -283,8 +276,7 @@
     whoami: function () { return "Mahyar — Developer & Security Enthusiast · Iran"; },
     ls: function () {
       var n = document.getElementById("m-repos");
-      var s = document.getElementById("m-stars");
-      return "repos: " + (n ? n.textContent : "?") + " · stars: " + (s ? s.textContent : "?");
+      return "repos: " + (n ? n.textContent : "?");
     },
     goto: function (sec) { return sec; },
     github: function () { return "github"; },

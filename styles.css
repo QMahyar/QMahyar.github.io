@@ -193,14 +193,6 @@ section { margin: 72px 0 0; scroll-margin-top: 70px; }
 
 @keyframes blink { 50% { opacity: 0; } }
 
-.hero-split {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: 40px;
-  align-items: start;
-  margin-top: 36px;
-}
-
 .name {
   margin: 0 0 10px;
   font-size: clamp(1.7rem, 4.5vw, 2.5rem);
@@ -209,29 +201,6 @@ section { margin: 72px 0 0; scroll-margin-top: 70px; }
 }
 
 .lede { margin: 0; max-width: 52ch; color: var(--text-dim); }
-
-/* neofetch-style system info */
-
-.sysinfo {
-  margin: 0;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--panel);
-  overflow: hidden;
-  font-size: 0.85rem;
-}
-
-.sysinfo > div {
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: 12px;
-  padding: 8px 14px;
-  border-bottom: 1px solid var(--border);
-}
-.sysinfo > div:last-child { border-bottom: none; }
-
-.sysinfo dt { color: var(--cyan); margin: 0; }
-.sysinfo dd { margin: 0; color: var(--text-dim); }
 
 /* ── Section headers ─────────────────────────────────────── */
 
@@ -436,8 +405,6 @@ section > h2 {
 .tag-py   { color: var(--yellow);  border-color: rgba(255, 238, 88, 0.4); }
 .tag-lua  { color: var(--magenta); border-color: rgba(224, 64, 208, 0.4); }
 
-.stars { color: var(--yellow); font-size: 0.82rem; }
-
 .status {
   font-size: 0.7rem;
   padding: 2px 8px;
@@ -639,8 +606,6 @@ footer p { margin: 0; color: var(--muted); font-size: 0.85rem; }
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media (max-width: 720px) {
-  .hero-split { grid-template-columns: 1fr; gap: 24px; }
-  .sysinfo { max-width: none; }
 }
 
 @media (max-width: 640px) {
