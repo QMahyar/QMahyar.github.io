@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahyar — Developer &amp; Security Enthusiast</title>
+<meta name="description" content="Mahyar (QMahyar) — developer & security enthusiast. Go, TypeScript, Python, Lua. Tools for Telegram, networking, and developer workflows.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230C0C0C'/%3E%3Ctext x='4' y='23' font-family='monospace' font-size='18' fill='%2323F00F'%3E%E2%9D%AF_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================================================================
+     GitHub Pages site — QMahyar.github.io
+     ----------------------------------------------------------------
+     How to edit:
+       · Projects live in <section id="projects"> — copy or delete a
+         <article class="project"> block to add/remove one.
+       · Your tagline: <p class="lede"> under the terminal card.
+       · Stack chips: <li> inside #stack.
+       · Contact links: <a> inside #contact.
+     ================================================================ -->
+
+<header class="topbar" id="top">
+  <a class="brand" href="#top"><span class="brand-dot" aria-hidden="true"></span>QMahyar</a>
+  <nav aria-label="Sections">
+    <a href="#projects">~/projects</a>
+    <a href="#stack">~/stack</a>
+    <a href="#contact">~/contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ── Hero: terminal session (signature) ───────────────────────── -->
+  <section class="hero" aria-label="Intro">
+    <div class="terminal" role="presentation">
+      <div class="terminal-bar">
+        <span class="dot dot-r" aria-hidden="true"></span>
+        <span class="dot dot-y" aria-hidden="true"></span>
+        <span class="dot dot-g" aria-hidden="true"></span>
+        <span class="terminal-title">mahyar@github — ~</span>
+      </div>
+      <div class="terminal-body">
+        <div class="typewriter" id="typewriter" aria-live="polite"></div>
+        <span class="cursor" id="cursor" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <h1 class="name">Hi, I&rsquo;m Mahyar.</h1>
+    <p class="lede">
+      Developer &amp; security enthusiast from Iran. I build tools for Telegram,
+      networking, and developer workflows — mostly in Go and TypeScript.
+    </p>
+  </section>
+
+  <!-- ── Projects ─────────────────────────────────────────────────── -->
+  <section id="projects">
+    <h2><span class="prompt" aria-hidden="true">$</span> ~/projects</h2>
+
+    <div class="project-group">
+      <h3>Telegram &amp; Messaging</h3>
+      <!-- #region telegram -->
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/Telegram-Cli" target="_blank" rel="noopener">Telegram-Cli</a></h4>
+          <p>MTProto CLI — multi-account sync, search, cross-account broadcasts, raw gateway.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-go">Go</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/TeleManager" target="_blank" rel="noopener">TeleManager</a></h4>
+          <p>Local-first Telegram session manager — guarded multi-account actions on local sessions.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-ts">TypeScript</span>
+          <span class="stars">★ 1</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/Q-Manager" target="_blank" rel="noopener">Q-Manager</a></h4>
+          <p>Cross-platform desktop app for Telegram Werewolf game automation — multi-account management, phase detection, action automation.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-ts">TypeScript</span>
+          <span class="stars">★ 1</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <!-- #endregion -->
+    </div>
+
+    <div class="project-group">
+      <h3>Networking &amp; Cloud</h3>
+      <!-- #region network -->
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/Cloudflare-Scanner" target="_blank" rel="noopener">Cloudflare-Scanner</a></h4>
+          <p>Cloudflare Warp endpoint/IP scanner built on xray-core — UDP noise support, live results, batch apply to configs.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-go">Go</span>
+          <span class="stars">★ 10</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <!-- #endregion -->
+    </div>
+
+    <div class="project-group">
+      <h3>Developer Tools</h3>
+      <!-- #region tools -->
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/cli-maker" target="_blank" rel="noopener">cli-maker</a></h4>
+          <p>CLI generator — produces Go CLIs from API docs with local SQLite caching and compound commands.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-go">Go</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/pi-9router" target="_blank" rel="noopener">pi-9router</a></h4>
+          <p>pi extension — multi-provider gateway for chat, image, speech, search &amp; fetch tools.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-ts">TypeScript</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/pi-exa-search" target="_blank" rel="noopener">pi-exa-search</a></h4>
+          <p>pi extension — semantic web search &amp; page fetch with multi-key rotation and highlights.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-ts">TypeScript</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/pi-termux" target="_blank" rel="noopener">pi-termux</a></h4>
+          <p>pi skill for Termux extra keys — layout configs, reference, macros.</p>
+        </div>
+        <div class="project-meta">
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <!-- #endregion -->
+    </div>
+
+    <div class="project-group">
+      <h3>Apps &amp; Configs</h3>
+      <!-- #region apps -->
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/BroAgent" target="_blank" rel="noopener">BroAgent</a></h4>
+          <p>Self-hosted automation daemon — multi-provider, OAuth, TUI wizard, chat integrations (Telegram/Discord/Slack), WebSocket gateway.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-go">Go</span>
+          <span class="stars">★ 1</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/wezterm-config" target="_blank" rel="noopener">wezterm-config</a></h4>
+          <p>Personal WezTerm configuration for Windows.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-lua">Lua</span>
+          <span class="stars">★ 1</span>
+          <span class="status status-active">active</span>
+        </div>
+      </article>
+
+      <!-- #endregion -->
+    </div>
+
+    <div class="project-group">
+      <h3>Archived</h3>
+      <!-- #region archived -->
+
+      <article class="project">
+        <div class="project-main">
+          <h4><a href="https://github.com/QMahyar/Zaraban_Robot" target="_blank" rel="noopener">Zaraban_Robot</a></h4>
+          <p>Self-contained Telegram group moderation bot — anti-spam, flood detection, user &amp; content moderation.</p>
+        </div>
+        <div class="project-meta">
+          <span class="tag tag-py">Python</span>
+          <span class="status status-archived">archived</span>
+        </div>
+      </article>
+
+      <!-- #endregion -->
+    </div>
+  </section>
+
+  <!-- ── Stack ────────────────────────────────────────────────────── -->
+  <section id="stack">
+    <h2><span class="prompt" aria-hidden="true">$</span> ~/stack</h2>
+    <ul class="chips">
+      <li>Go</li>
+      <li>TypeScript</li>
+      <li>Python</li>
+      <li>Lua</li>
+      <li>Cloudflare</li>
+      <li>Network tooling</li>
+      <li>Automation</li>
+      <li>Telegram MTProto</li>
+      <li>WebSockets</li>
+      <li>Windows / WSL</li>
+    </ul>
+  </section>
+
+  <!-- ── Contact ──────────────────────────────────────────────────── -->
+  <section id="contact">
+    <h2><span class="prompt" aria-hidden="true">$</span> ~/contact</h2>
+    <ul class="contact">
+      <li><a href="https://github.com/QMahyar" target="_blank" rel="noopener">github.com/QMahyar</a> <span class="muted">— code</span></li>
+      <li><a href="https://t.me/Qstickers" target="_blank" rel="noopener">t.me/Qstickers</a> <span class="muted">— telegram</span></li>
+      <li><a href="https://x.com/Mahyartdb" target="_blank" rel="noopener">x.com/Mahyartdb</a> <span class="muted">— twitter</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Mahyar <span class="muted">·</span> <a href="https://github.com/QMahyar/QMahyar.github.io" target="_blank" rel="noopener">site source</a></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
