@@ -16,7 +16,7 @@
     user: "QMahyar",
 
     /* repos hidden from ~/projects (by exact name) */
-    exclude: ["QMahyar", "QMahyar.github.io"],
+    exclude: ["QMahyar", "QMahyar.github.io", "Zaraban_Robot"],
     hideForks: true,
 
     /* repos shown with ✦ + highlight bullets (by exact name) */
@@ -302,21 +302,27 @@
     var host = document.getElementById("projects-list");
     if (!host) return;
 
-    var items = repos.map(decorate).sort(compare);
+    var items = repos
+      .filter(function (r) { return CONFIG.hideForks ? !r.fork : true; })
+      .filter(function (r) { return CONFIG.exclude.indexOf(r.name) === -1; })
+      .map(decorate)
+      .sort(compare);
     host.innerHTML = "";
 
+    /* create groups up-front, in CONFIG order */
     var groups = {};
+    CONFIG.groups.forEach(function (g) {
+      var wrap = document.createElement("div");
+      wrap.className = "project-group";
+      wrap.dataset.group = g.name;
+      var h3 = document.createElement("h3");
+      h3.textContent = g.name;
+      wrap.appendChild(h3);
+      host.appendChild(wrap);
+      groups[g.name] = wrap;
+    });
+
     items.forEach(function (r) {
-      if (!groups[r.group]) {
-        var wrap = document.createElement("div");
-        wrap.className = "project-group";
-        wrap.dataset.group = r.group;
-        var h3 = document.createElement("h3");
-        h3.textContent = r.group;
-        wrap.appendChild(h3);
-        host.appendChild(wrap);
-        groups[r.group] = wrap;
-      }
       var art = document.createElement("article");
       art.className = "project" + (r.featured ? " featured" : "");
       art.dataset.name = r.name.toLowerCase();
@@ -344,6 +350,11 @@
         '<div class="project-meta">' + langTag(r.lang) + st + st2 + "</div>";
 
       groups[r.group].appendChild(art);
+    });
+
+    /* drop empty groups */
+    Object.keys(groups).forEach(function (name) {
+      if (!groups[name].querySelector(".project")) groups[name].remove();
     });
 
     setText("filter-count", items.length + " projects");
