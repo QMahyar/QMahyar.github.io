@@ -48,14 +48,14 @@
     /* description overrides — Persian (falls back to English, then GitHub) */
     describeFa: {
       "Telegram-Cli": "همهی حسابهای تلگرامت در یک ترمینال — با MTProto، درست مثل یک کاربر واقعی.",
-      "TeleManager": "مدیریت نشستهای محلی حسابهای تلگرامت — یک برنامهی وب محلی که هیچ چیزی از دستگاهت خارج نمیشود.",
-      "Q-Manager": "برنامهی دسکتاپ چندپلتفرمی برای خودکارسازی بازی گرگینه در تلگرام — مدیریت چند حساب، تشخیص مرحله و اجرای خودکار.",
-      "Cloudflare-Scanner": "اندپوینتهای سالم Warp کلادفلر و آیپیهای پروکسی تمیز را پیدا کن — سریع، رایگان، بدون تنظیم.",
-      "cli-maker": "تولیدکنندهی CLI — از روی مستندات API، ابزارهای خط فرمان Go میسازد با کش محلی SQLite و دستورات ترکیبی.",
-      "pi-9router": "افزونهی pi — درگاه چندارائهدهنده برای ابزارهای چت، تصویر، گفتار، جستجو و بازیابی.",
-      "pi-exa-search": "افزونهی pi — جستجوی معنایی وب و بازیابی صفحه با چرخش کلیدها و نکات برجسته.",
-      "pi-termux": "ابزار pi برای کلیدهای اضافهی Termux — لایوت‌ها، مرجع و ماکروها.",
-      "wezterm-config": "تنظیمات شخصی WezTerm برای ویندوز — همان پالت رنگی که این سایت از آن ساخته شده."
+      "TeleManager": "مدیریت محلی نشستهای تلگرامت — یک برنامهی وب که هیچی از دستگاهت بیرون نمیره.",
+      "Q-Manager": "برنامهی دسکتاپ چندسیستمی برای بازی گرگینه تلگرام — مدیریت چند حساب، تشخیص فاز و اجرای خودکار.",
+      "Cloudflare-Scanner": "اندپوینتهای سالم Warp کلادفلر و آیپیهای پروکسی تمیز رو پیدا کن — سریع، رایگان، بدون دردسر.",
+      "cli-maker": "تولیدکنندهی CLI — از مستندات API، ابزارهای خط فرمان Go می‌سازه با کش محلی SQLite و دستورات ترکیبی.",
+      "pi-9router": "افزونهی pi — درگاه چندارائهده برای چت، تصویر، گفتار، جستجو و بازیابی.",
+      "pi-exa-search": "افزونهی pi — جستجوی معنایی وب و بازیابی صفحه با چرخش کلیدها و هایلایت.",
+      "pi-termux": "ابزار pi برای کلیدهای اضافهی Termux — لایوت‌ها، رفرنس و ماکرو.",
+      "wezterm-config": "تنظیمات شخصی WezTerm برای ویندوز — همون پالت رنگی که این سایت باهاش ساخته شده."
     },
 
     /* extra links: { "<repo>": { label, url } } — label "releases" is translated; npm is automatic */
@@ -69,7 +69,7 @@
       { name: "Telegram & Messaging", nameFa: "تلگرام و پیامرسان", match: ["telegram", "mtproto", "telethon", "werewolf", "broadcast", "session"] },
       { name: "Networking & Cloud",   nameFa: "شبکه و ابر",       match: ["cloudflare", "warp", "vpn", "xray", "network", "scanner", "privacy"] },
       { name: "Developer Tools",      nameFa: "ابزارهای توسعه",   match: ["pi-", "cli", "extension", "generator", "9router", "exa", "search", "npm"] },
-      { name: "Apps & Configs",       nameFa: "اپها و تنظیمات",   match: [] } /* fallback group */
+      { name: "Apps & Configs",       nameFa: "برنامه‌ها و تنظیمات",   match: [] } /* fallback group */
     ],
 
     starredLimit: 8,
@@ -117,37 +117,37 @@
       }
     },
     fa: {
-      navAbout: "~/درباره", navProjects: "~/پروژهها", navStack: "~/تخصصها",
-      navRecent: "~/اخیراً", navStarred: "~/ستارهشده", navContact: "~/تماس",
-      secAbout: "~/درباره", secProjects: "~/پروژهها", secStack: "~/تخصصها",
-      secRecent: "~/اخیراً", secStarred: "~/ستارهشده", secContact: "~/تماس",
+      navAbout: "~/درباره", navProjects: "~/پروژه‌ها", navStack: "~/تخصص‌ها",
+      navRecent: "~/اخیراً", navStarred: "~/ستاره‌دار", navContact: "~/تماس",
+      secAbout: "~/درباره", secProjects: "~/پروژه‌ها", secStack: "~/تخصص‌ها",
+      secRecent: "~/اخیراً", secStarred: "~/ستاره‌دار", secContact: "~/تماس",
       paletteHint: "برای دستورات <kbd>/</kbd> را بزن",
       name: "سلام، من مهیارم.",
-      lede: "توسعه‌دهنده و علاقه‌مند به امنیت، اهل ایران. ابزارهایی برای تلگرام، شبکه و محیط کار توسعه‌دهنده می‌سازم — عمدتاً با Go و TypeScript.",
-      aboutP1: "ابزارهای کاربردی برای تلگرام و شبکه می‌سازم — کلاینتهای MTProto، مدیریت حسابها، اسکنرهای Cloudflare — به‌علاوهی ابزارهای توسعه و تنظیمات ترمینال. بیشتر کارهام متن‌بازه: اگر پایین نوشته و <em>fork</em> نیست، مال خودمه.",
-      aboutP2: "الان روی <a href=\"https://github.com/QMahyar/Telegram-Cli\" target=\"_blank\" rel=\"noopener\">Telegram-Cli</a> کار می‌کنم — یک درگاه MTProto مبتنی بر اسکیما که همهی حسابهای تلگرامت رو به‌عنوان یک ناوگان واحد می‌بینه.",
+      lede: "توسعه‌دهنده و علاقه‌مند به امنیت، اهل ایران. ابزارهایی برای تلگرام، شبکه و توسعه می‌سازم — عمدتاً با Go و TypeScript.",
+      aboutP1: "ابزارهای کاربردی برای تلگرام و شبکه می‌سازم — کلاینتهای MTProto، مدیریت حسابها، اسکنرهای Cloudflare — و ابزارهای توسعه و ترمینال. بیشتر کارهام متن‌بازه: اگر پایین نوشته و <em>fork</em> نیست، مال خودمه.",
+      aboutP2: "الان روی <a href=\"https://github.com/QMahyar/Telegram-Cli\" target=\"_blank\" rel=\"noopener\">Telegram-Cli</a> کار می‌کنم — یک درگاه MTProto مبتنی بر اسکیما که همهی حسابهای تلگرامت رو یک ناوگان واحد می‌بینه.",
       metricRepos: "پروژه", metricFollowers: "دنبال‌کننده", metricFollowing: "دنبال‌شده", metricSince: "عضو گیتهاب از",
-      subheadLangs: "تفکیک زبانها",
+      subheadLangs: "توزیع زبانها",
       filterPlaceholder: "نام، زبان، کلمهی کلیدی…",
       filterLoading: "در حال بارگذاری…",
-      projectsLoading: "در حال دریافت از API گیتهاب…",
+      projectsLoading: "داره از API گیتهاب دریافت می‌کنه…",
       stackLanguages: "زبانها", stackPlatforms: "پلتفرمها و ابزارها", stackAreas: "حوزهها",
       chipWindows: "ویندوز / WSL", chipNetwork: "ابزارهای شبکه", chipAutomation: "اتوماسیون",
-      chipCli: "طراحی CLI", chipLocal: "برنامههای محلی",
-      recentNote: "آخرین به‌روزرسانی — دریافت زنده از API گیتهاب",
+      chipCli: "طراحی CLI", chipLocal: "برنامه‌های محلی",
+      recentNote: "آخرین آپدیت — داره زنده از API گیتهاب دریافت می‌شه",
       lastPush: "آخرین پوش",
       contactCode: "کد", contactTelegram: "تلگرام", contactTwitter: "توییتر",
-      contactTip: "نکته: برای دستورات، کلید <kbd>/</kbd> یا <kbd>Ctrl</kbd>+<kbd>K</kbd> را هر جای صفحه بزنید",
+      contactTip: "نکته: کلید <kbd>/</kbd> یا <kbd>Ctrl</kbd>+<kbd>K</kbd> رو هر جای صفحه بزن تا دستورات باز بشه",
       footerSource: "منبع سایت",
       langBtn: "EN",
-      statusActive: "فعال", statusArchived: "بایگانی‌شده",
-      releases: "نسخهها",
+      statusActive: "فعال", statusArchived: "بایگانی شده",
+      releases: "نسخه‌ها",
       activityLess: "کمتر", activityMore: "بیشتر",
       projectsCount: function (n) { return faD(n) + " پروژه"; },
       projectsMatched: function (a, b) { return faD(a) + " از " + faD(b) + " پیدا شد"; },
       starredNote: function (shown, total) {
-        return "پروژههای ستاره‌دارم در گیتهاب — زنده · " +
-          (total ? faD(shown) + " مورد از " + faD(total) + " مورد" : faD(shown) + " مورد ستاره‌دار");
+        return "پروژه‌های ستاره‌دارم در گیتهاب — زنده · " +
+          (total ? faD(shown) + " تا از " + faD(total) + " تا" : faD(shown) + " تا ستاره‌دار");
       },
       activityTip: function(count, date) {
         return faD(count) + " مشارکت در " + date;
