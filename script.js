@@ -40,6 +40,26 @@
       ]
     },
 
+    /* feature bullets — Persian (falls back to English) */
+    highlightsFa: {
+      "Telegram-Cli": [
+        "همگام‌سازی یکپارچه + جستجوی آفلاین در همه‌ی حساب‌ها",
+        "ارسال همگانی flood-aware بین همه‌ی حساب‌ها",
+        "درگاه invoke خام مبتنی بر اسکیما — متدهای جدید TL قبل از هر دستور"
+      ],
+      "TeleManager": [
+        "ورود، ایمپورت و اکسپورت بکاپ‌های امن نشست",
+        "کشف دیالوگ‌ها با کش محلی متادیتا",
+        "صف‌های اجرای محافظت‌شده + زمان‌بندی‌های دوره‌ای"
+      ],
+      "Cloudflare-Scanner": [
+        "اسکن از شبکه‌ی خودت — رتبه‌بندی بر اساس عملکرد واقعی",
+        "همراه با xray-core برای اعتبارسنجی واقعی",
+        "نتایج زنده + اعمال دسته‌ای روی کانفیگ‌ها",
+        "بیلد برای ویندوز · لینوکس · macOS · Termux"
+      ]
+    },
+
     /* description overrides — English */
     describe: {
       "TeleManager": "Local-first session manager for your own Telegram accounts — a local web app, nothing leaves your machine."
@@ -49,12 +69,12 @@
     describeFa: {
       "Telegram-Cli": "همه‌ی حساب‌های تلگرامت در یک ترمینال — با MTProto، درست مثل یک کاربر واقعی.",
       "TeleManager": "مدیریت محلی نشست‌های تلگرامت — یک برنامه‌ی وب که هیچی از دستگاهت بیرون نمی‌ره.",
-      "Q-Manager": "برنامه‌ی دسکتاپ چندسیستمی برای بازی گرگینه تلگرام — مدیریت چند حساب، تشخیص فاز و اجرای خودکار.",
+      "Q-Manager": "برنامه‌ی دسکتاپ چندپلتفرمی برای بازی گرگینه‌ی تلگرام — مدیریت چند حساب، تشخیص فاز و اجرای خودکار.",
       "Cloudflare-Scanner": "اندپوینت‌های سالم Warp کلادفلر و آی‌پی‌های پروکسی تمیز رو پیدا کن — سریع، رایگان، بدون دردسر.",
-      "cli-maker": "تولیدکننده‌ی CLI — از مستندات API، ابزارهای خط فرمان Go می‌سازه با کش محلی SQLite و دستورات ترکیبی.",
-      "pi-9router": "افزونه‌ی pi — درگاه چندارائهده برای چت، تصویر، گفتار، جستجو و بازیابی.",
+      "cli-maker": "تولیدکننده‌ی CLI — از روی مستندات API ابزارهای خط فرمان Go می‌سازه، با کش محلی SQLite و دستورات ترکیبی.",
+      "pi-9router": "افزونه‌ی pi — درگاه چندارائه‌دهنده برای چت، تصویر، گفتار، جستجو و بازیابی.",
       "pi-exa-search": "افزونه‌ی pi — جستجوی معنایی وب و بازیابی صفحه با چرخش کلیدها و هایلایت.",
-      "pi-termux": "ابزار pi برای کلیدهای اضافه‌ی Termux — لایوت‌ها، رفرنس و ماکرو.",
+      "pi-termux": "ابزار pi برای کلیدهای اضافی Termux — لایوت‌ها، رفرنس و ماکرو.",
       "wezterm-config": "تنظیمات شخصی WezTerm برای ویندوز — همون پالت رنگی که این سایت باهاش ساخته شده."
     },
 
@@ -66,7 +86,7 @@
 
     /* group order + keyword rules (matched against name, topics, description) */
     groups: [
-      { name: "Telegram & Messaging", nameFa: "تلگرام و پیامرسان", match: ["telegram", "mtproto", "telethon", "werewolf", "broadcast", "session"] },
+      { name: "Telegram & Messaging", nameFa: "تلگرام و پیام‌رسان", match: ["telegram", "mtproto", "telethon", "werewolf", "broadcast", "session"] },
       { name: "Networking & Cloud",   nameFa: "شبکه و ابر",       match: ["cloudflare", "warp", "vpn", "xray", "network", "scanner", "privacy"] },
       { name: "Developer Tools",      nameFa: "ابزارهای توسعه",   match: ["pi-", "cli", "extension", "generator", "9router", "exa", "search", "npm"] },
       { name: "Apps & Configs",       nameFa: "برنامه‌ها و تنظیمات",   match: [] } /* fallback group */
@@ -85,7 +105,7 @@
       secAbout: "~/about", secProjects: "~/projects", secStack: "~/stack",
       secRecent: "~/recent", secStarred: "~/starred", secContact: "~/contact",
       paletteHint: "press <kbd>/</kbd> for commands",
-      name: "Hi, I&rsquo;m Mahyar.",
+      name: "Hi, I'm Mahyar.",
       lede: "Developer & security enthusiast from Iran. I build tools for Telegram, networking, and developer workflows — mostly in Go and TypeScript.",
       aboutP1: "I write practical tooling for Telegram and networking — MTProto CLIs, account managers, Cloudflare edge scanners — plus developer tools and terminal setups. Most of my work is in the open: if it&rsquo;s below and doesn&rsquo;t say <em>fork</em>, it&rsquo;s mine.",
       aboutP2: "Currently building <a href=\"https://github.com/QMahyar/Telegram-Cli\" target=\"_blank\" rel=\"noopener\">Telegram-Cli</a> — a schema-driven MTProto gateway that treats every Telegram account you own as one fleet.",
@@ -118,15 +138,15 @@
     },
     fa: {
       navAbout: "~/درباره", navProjects: "~/پروژه‌ها", navStack: "~/تخصص‌ها",
-      navRecent: "~/اخیراً", navStarred: "~/ستاره‌دار", navContact: "~/تماس",
+      navRecent: "~/تازه‌ها", navStarred: "~/ستاره‌دار", navContact: "~/تماس",
       secAbout: "~/درباره", secProjects: "~/پروژه‌ها", secStack: "~/تخصص‌ها",
-      secRecent: "~/اخیراً", secStarred: "~/ستاره‌دار", secContact: "~/تماس",
+      secRecent: "~/تازه‌ها", secStarred: "~/ستاره‌دار", secContact: "~/تماس",
       paletteHint: "برای دستورات <kbd>/</kbd> رو بزن",
       name: "سلام، من مهیارم.",
       lede: "توسعه‌دهنده و علاقه‌مند به امنیت، اهل ایران. ابزارهایی برای تلگرام، شبکه و توسعه می‌سازم — عمدتاً با Go و TypeScript.",
-      aboutP1: "ابزارهای کاربردی برای تلگرام و شبکه می‌سازم — کلاینت‌های MTProto، مدیریت حساب‌ها، اسکنرهای Cloudflare — و ابزارهای توسعه و ترمینال. بیشتر کارهام متن‌بازه: اگر پایین نوشته و <em>fork</em> نیست، مال خودمه.",
-      aboutP2: "الان روی <a href=\"https://github.com/QMahyar/Telegram-Cli\" target=\"_blank\" rel=\"noopener\">Telegram-Cli</a> کار می‌کنم — یک درگاه MTProto مبتنی بر اسکیما که همه‌ی حساب‌های تلگرامت رو یک ناوگان واحد می‌بینه.",
-      metricRepos: "پروژه", metricFollowers: "دنبال‌کننده", metricFollowing: "دنبال‌شده", metricSince: "عضو گیتهاب از",
+      aboutP1: "ابزارهای کاربردی برای تلگرام و شبکه می‌سازم — کلاینت‌های MTProto، مدیریت حساب‌ها، اسکنرهای Cloudflare — و ابزارهای توسعه و تنظیمات ترمینال. بیشتر کارهام متن‌بازه: هر چی پایین می‌بینی، اگه <em>fork</em> نباشه، مال خودمه.",
+      aboutP2: "الان دارم <a href=\"https://github.com/QMahyar/Telegram-Cli\" target=\"_blank\" rel=\"noopener\">Telegram-Cli</a> رو می‌سازم — یک درگاه MTProto مبتنی بر اسکیما که همه‌ی حساب‌های تلگرامت رو مثل یک ناوگان واحد می‌بینه.",
+      metricRepos: "پروژه", metricFollowers: "دنبال‌کننده", metricFollowing: "دنبال‌شونده", metricSince: "عضو گیتهاب از",
       subheadLangs: "توزیع زبان‌ها",
       filterPlaceholder: "نام، زبان، کلمه‌ی کلیدی…",
       filterLoading: "در حال بارگذاری…",
@@ -134,10 +154,10 @@
       stackLanguages: "زبان‌ها", stackPlatforms: "پلتفرم‌ها و ابزارها", stackAreas: "حوزه‌ها",
       chipWindows: "ویندوز / WSL", chipNetwork: "ابزارهای شبکه", chipAutomation: "اتوماسیون",
       chipCli: "طراحی CLI", chipLocal: "برنامه‌های محلی",
-      recentNote: "آخرین آپدیت — داره زنده از API گیتهاب دریافت می‌شه",
+      recentNote: "آخرین پوش‌ها — مستقیم از API گیتهاب",
       lastPush: "آخرین پوش",
       contactCode: "کد", contactTelegram: "تلگرام", contactTwitter: "توییتر",
-      contactTip: "نکته: کلید <kbd>/</kbd> یا <kbd>Ctrl</kbd>+<kbd>K</kbd> رو هر جای صفحه بزن تا دستورات باز بشه",
+      contactTip: "نکته: برای باز کردن دستورات، <kbd>/</kbd> یا <kbd>Ctrl</kbd>+<kbd>K</kbd> رو هر جای صفحه بزن",
       footerSource: "منبع سایت",
       langBtn: "EN",
       statusActive: "فعال", statusArchived: "بایگانی شده",
@@ -147,7 +167,7 @@
       projectsMatched: function (a, b) { return faD(a) + " از " + faD(b) + " پیدا شد"; },
       starredNote: function (shown, total) {
         return "پروژه‌های ستاره‌دارم در گیتهاب — زنده · " +
-          (total ? faD(shown) + " تا از " + faD(total) + " تا" : faD(shown) + " تا ستاره‌دار");
+          (total ? faD(shown) + " تای برتر از " + faD(total) + " تا" : faD(shown) + " تا ستاره‌دار");
       },
       activityTip: function(count, date) {
         return faD(count) + " مشارکت در " + date;
@@ -342,8 +362,12 @@
     if (el) el.textContent = val;
   }
 
-  function formatDate(iso) {
+  function formatDate(lang, iso) {
     var d = new Date(iso);
+    if (lang === "fa") {
+      var monthsFa = ["ژانویه", "فوریه", "مارس", "آوریل", "مه", "ژوئن", "ژوئیه", "اوت", "سپتامبر", "اکتبر", "نوامبر", "دسامبر"];
+      return faD(d.getDate()) + " " + monthsFa[d.getMonth()] + " " + faD(d.getFullYear());
+    }
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
   }
@@ -431,7 +455,16 @@
   /* ═══════════════════════ 7. Auto projects ═════════════════════ */
 
   function decorate(r) {
-    if (r.pre) return r;
+    if (r.pre) {
+      var faDesc = CONFIG.describeFa[r.name];
+      var enDesc = CONFIG.describe[r.name];
+      var desc = LANG === "fa" ? (faDesc || enDesc || r.desc) : (enDesc || r.desc);
+      var hl = LANG === "fa"
+        ? (CONFIG.highlightsFa[r.name] || CONFIG.highlights[r.name] || [])
+        : (CONFIG.highlights[r.name] || []);
+      if (desc === r.desc && hl === r.highlights) return r;
+      return Object.assign({}, r, { desc: desc, highlights: hl });
+    }
 
     var name = r.name;
     var desc = LANG === "fa" && CONFIG.describeFa[name]
@@ -460,7 +493,9 @@
       group: groupName,
       groupFa: groupFa,
       featured: CONFIG.featured.indexOf(name) !== -1,
-      highlights: CONFIG.highlights[name] || [],
+      highlights: LANG === "fa"
+        ? (CONFIG.highlightsFa[name] || CONFIG.highlights[name] || [])
+        : (CONFIG.highlights[name] || []),
       link: link,
       tags: tags,
       pushed: new Date(r.pushed_at || 0).getTime()
@@ -818,7 +853,7 @@
       cell.dataset.level = String(lv);
 
       if (count > 0) {
-        cell.dataset.tip = t("activityTip")(count, formatDate(cellDate.toISOString()));
+        cell.dataset.tip = t("activityTip")(count, formatDate(LANG, cellDate.toISOString()));
       }
 
       frag.appendChild(cell);
@@ -842,7 +877,7 @@
     { pre: true, name: "pi-9router", desc: "pi extension — multi-provider gateway for chat, image, speech, search & fetch tools.", lang: "TypeScript", stars: 0, archived: false, url: "https://github.com/QMahyar/pi-9router", group: "Developer Tools", groupFa: "ابزارهای توسعه", featured: false, highlights: [], link: { label: "npm", url: "https://www.npmjs.com/package/@qmahyar/pi-9router" }, tags: "pi-9router typescript pi extension gateway npm", pushed: 0 },
     { pre: true, name: "pi-exa-search", desc: "pi extension — semantic web search & page fetch with multi-key rotation and highlights.", lang: "TypeScript", stars: 0, archived: false, url: "https://github.com/QMahyar/pi-exa-search", group: "Developer Tools", groupFa: "ابزارهای توسعه", featured: false, highlights: [], link: { label: "npm", url: "https://www.npmjs.com/package/@qmahyar/pi-exa-search" }, tags: "pi-exa-search typescript pi extension search npm", pushed: 0 },
     { pre: true, name: "pi-termux", desc: "pi skill for Termux extra keys — layout configs, reference, macros.", lang: "", stars: 1, archived: false, url: "https://github.com/QMahyar/pi-termux", group: "Developer Tools", groupFa: "ابزارهای توسعه", featured: false, highlights: [], link: null, tags: "pi-termux pi termux skill keys", pushed: 0 },
-    { pre: true, name: "wezterm-config", desc: "Personal WezTerm configuration for Windows — the palette this site is built from.", lang: "Lua", stars: 1, archived: false, url: "https://github.com/QMahyar/wezterm-config", group: "Apps & Configs", groupFa: "اپها و تنظیمات", featured: false, highlights: [], link: null, tags: "wezterm-config lua wezterm terminal config windows", pushed: 0 }
+    { pre: true, name: "wezterm-config", desc: "Personal WezTerm configuration for Windows — the palette this site is built from.", lang: "Lua", stars: 1, archived: false, url: "https://github.com/QMahyar/wezterm-config", group: "Apps & Configs", groupFa: "برنامه‌ها و تنظیمات", featured: false, highlights: [], link: null, tags: "wezterm-config lua wezterm terminal config windows", pushed: 0 }
   ];
 
   /* initial render (fallback data), then live fetches replace it */

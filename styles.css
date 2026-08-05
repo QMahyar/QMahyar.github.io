@@ -57,6 +57,13 @@ html[lang="fa"] .project-group > h3,
 html[lang="fa"] .chip-group > h3,
 html[lang="fa"] .metric-label { letter-spacing: 0; }
 
+html[lang="fa"] .metric-label {
+  font-size: 0.65rem;
+  text-transform: none;
+  white-space: normal;
+  line-height: 1.3;
+}
+
 html[lang="fa"] .filterbar input { font-family: var(--fa); }
 
 /* RTL: mirror the project accent bar + highlight bullets */
@@ -73,6 +80,20 @@ html[dir="rtl"] .highlights li {
 html[dir="rtl"] .highlights li::before {
   left: auto;
   right: 0;
+}
+
+/* RTL: mirror language bars layout, keep fill direction */
+html[dir="rtl"] .bar {
+  grid-template-columns: 52px 1fr 110px;
+}
+html[dir="rtl"] .bar-label {
+  text-align: left;
+}
+html[dir="rtl"] .bar-track {
+  direction: ltr;
+}
+html[dir="rtl"] .bar-pct {
+  text-align: right;
 }
 
 html[lang="fa"] .typewriter,
@@ -138,7 +159,7 @@ kbd {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 10px 14px;
   flex-wrap: wrap;
   max-width: var(--maxw);
   margin: 0 auto;
@@ -173,7 +194,7 @@ kbd {
   50% { box-shadow: 0 0 16px var(--green), 0 0 24px rgba(35, 240, 15, 0.3); }
 }
 
-.topbar nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.topbar nav { display: flex; gap: 14px; flex-wrap: wrap; }
 .topbar nav a {
   color: var(--muted);
   font-size: 0.9rem;
@@ -363,7 +384,8 @@ section > h2 {
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--panel);
-  padding: 14px 16px;
+  padding: 14px 12px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -397,12 +419,15 @@ section > h2 {
   z-index: 1;
 }
 .metric-label {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--muted);
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ASCII language bars */
