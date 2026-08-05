@@ -109,7 +109,7 @@
       lede: "Developer & security enthusiast from Iran. I build tools for Telegram, networking, and developer workflows — mostly in Go and TypeScript.",
       aboutP1: "I write practical tooling for Telegram and networking — MTProto CLIs, account managers, Cloudflare edge scanners — plus developer tools and terminal setups. Most of my work is in the open: if it&rsquo;s below and doesn&rsquo;t say <em>fork</em>, it&rsquo;s mine.",
       aboutP2: "Currently building <a href=\"https://github.com/QMahyar/Telegram-Cli\" target=\"_blank\" rel=\"noopener\">Telegram-Cli</a> — a schema-driven MTProto gateway that treats every Telegram account you own as one fleet.",
-      metricRepos: "repos", metricFollowers: "followers", metricFollowing: "following", metricSince: "on github since",
+      metricRepos: "repos", metricFollowers: "followers", metricFollowing: "following", metricSince: "on GitHub since",
       subheadLangs: "language breakdown",
       filterPlaceholder: "name, language, keyword…",
       filterLoading: "loading projects…",
@@ -126,10 +126,14 @@
       statusActive: "active", statusArchived: "archived",
       releases: "releases",
       activityLess: "less", activityMore: "more",
+      navAria: "Sections", langBtnAria: "Switch language", paletteHintAria: "Open command palette",
+      introAria: "Intro", metricsAria: "GitHub metrics", langbarsAria: "Languages by repository count",
+      activityAria: "Contribution activity", paletteAria: "Command palette", paletteInputAria: "Enter a command",
+      starredNoteStatic: "repos I've starred on GitHub — live",
       projectsCount: function (n) { return n + " projects"; },
       projectsMatched: function (a, b) { return a + " / " + b + " matched"; },
       starredNote: function (shown, total) {
-        return "repos i've starred on github — live · " +
+        return "repos I've starred on GitHub — live · " +
           (total ? "top " + shown + " of " + total + " starred" : shown + " starred");
       },
       activityTip: function(count, date) {
@@ -141,7 +145,7 @@
       navRecent: "~/تازه‌ها", navStarred: "~/ستاره‌دار", navContact: "~/تماس",
       secAbout: "~/درباره", secProjects: "~/پروژه‌ها", secStack: "~/تخصص‌ها",
       secRecent: "~/تازه‌ها", secStarred: "~/ستاره‌دار", secContact: "~/تماس",
-      paletteHint: "برای دستورات <kbd>/</kbd> رو بزن",
+      paletteHint: "برای دستورات، <kbd>/</kbd> رو بزن",
       name: "سلام، من مهیارم.",
       lede: "توسعه‌دهنده و علاقه‌مند به امنیت، اهل ایران. ابزارهایی برای تلگرام، شبکه و توسعه می‌سازم — عمدتاً با Go و TypeScript.",
       aboutP1: "ابزارهای کاربردی برای تلگرام و شبکه می‌سازم — کلاینت‌های MTProto، مدیریت حساب‌ها، اسکنرهای Cloudflare — و ابزارهای توسعه و تنظیمات ترمینال. بیشتر کارهام متن‌بازه: هر چی پایین می‌بینی، اگه <em>fork</em> نباشه، مال خودمه.",
@@ -163,6 +167,10 @@
       statusActive: "فعال", statusArchived: "بایگانی شده",
       releases: "نسخه‌ها",
       activityLess: "کمتر", activityMore: "بیشتر",
+      navAria: "بخش‌ها", langBtnAria: "تغییر زبان", paletteHintAria: "باز کردن پالت دستورات",
+      introAria: "معرفی", metricsAria: "آمار گیتهاب", langbarsAria: "زبان‌ها بر اساس تعداد پروژه‌ها",
+      activityAria: "فعالیت مشارکت‌ها", paletteAria: "پالت دستورات", paletteInputAria: "دستور وارد کن",
+      starredNoteStatic: "پروژه‌های ستاره‌دارم در گیتهاب — زنده",
       projectsCount: function (n) { return faD(n) + " پروژه"; },
       projectsMatched: function (a, b) { return faD(a) + " از " + faD(b) + " پیدا شد"; },
       starredNote: function (shown, total) {
@@ -216,6 +224,10 @@
     document.querySelectorAll("[data-i18n-ph]").forEach(function (el) {
       var k = el.getAttribute("data-i18n-ph");
       if (I18N[LANG][k] !== undefined) el.placeholder = I18N[LANG][k];
+    });
+    document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
+      var k = el.getAttribute("data-i18n-aria");
+      if (I18N[LANG][k] !== undefined) el.setAttribute("aria-label", I18N[LANG][k]);
     });
 
     /* paths render as ~/… even inside RTL */

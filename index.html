@@ -28,7 +28,7 @@
 
 <header class="topbar" id="top">
   <a class="brand" href="#top"><span class="brand-dot" aria-hidden="true"></span>QMahyar</a>
-  <nav aria-label="Sections">
+  <nav aria-label="Sections" data-i18n-aria="navAria">
     <a href="#about" class="path" data-i18n="navAbout">~/about</a>
     <a href="#projects" class="path" data-i18n="navProjects">~/projects</a>
     <a href="#stack" class="path" data-i18n="navStack">~/stack</a>
@@ -37,15 +37,15 @@
     <a href="#contact" class="path" data-i18n="navContact">~/contact</a>
   </nav>
   <div class="topbar-actions">
-    <button class="lang-btn" id="lang-btn" data-i18n="langBtn" aria-label="Switch language">فارسی</button>
-    <button class="palette-hint" id="palette-hint" aria-label="Open command palette" data-i18n-html="paletteHint">press <kbd>/</kbd> for commands</button>
+    <button class="lang-btn" id="lang-btn" data-i18n="langBtn" aria-label="Switch language" data-i18n-aria="langBtnAria">فارسی</button>
+    <button class="palette-hint" id="palette-hint" aria-label="Open command palette" data-i18n-html="paletteHint" data-i18n-aria="paletteHintAria">press <kbd>/</kbd> for commands</button>
   </div>
 </header>
 
 <main>
 
   <!-- ── Hero ──────────────────────────────────────────────────── -->
-  <section class="hero" aria-label="Intro">
+  <section class="hero" aria-label="Intro" data-i18n-aria="introAria">
     <div class="terminal" role="presentation" dir="ltr">
       <div class="terminal-bar">
         <span class="dot dot-r" aria-hidden="true"></span>
@@ -83,15 +83,15 @@
       — a schema-driven MTProto gateway that treats every Telegram account you own as one fleet.
     </p>
 
-    <div class="metrics" id="metrics" aria-label="GitHub metrics">
+    <div class="metrics" id="metrics" aria-label="GitHub metrics" data-i18n-aria="metricsAria">
       <div class="metric"><span class="metric-num" id="m-repos">12</span><span class="metric-label" data-i18n="metricRepos">repos</span></div>
       <div class="metric"><span class="metric-num" id="m-followers">7</span><span class="metric-label" data-i18n="metricFollowers">followers</span></div>
       <div class="metric"><span class="metric-num" id="m-following">14</span><span class="metric-label" data-i18n="metricFollowing">following</span></div>
-      <div class="metric"><span class="metric-num" id="m-joined">2017</span><span class="metric-label" data-i18n="metricSince">on github since</span></div>
+      <div class="metric"><span class="metric-num" id="m-joined">2017</span><span class="metric-label" data-i18n="metricSince">on GitHub since</span></div>
     </div>
 
     <h3 class="subhead" data-i18n="subheadLangs">language breakdown</h3>
-    <div class="langbars" id="langbars" aria-label="Languages by repository count">
+    <div class="langbars" id="langbars" aria-label="Languages by repository count" data-i18n-aria="langbarsAria">
       <!-- populated live from the GitHub API; static fallback in script.js -->
     </div>
   </section>
@@ -150,7 +150,7 @@
   <section id="recent">
     <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secRecent">~/recent</span></h2>
     <div class="activity-grid-wrap">
-      <div class="activity-grid" id="activity-grid" aria-label="Contribution activity">
+      <div class="activity-grid" id="activity-grid" aria-label="Contribution activity" data-i18n-aria="activityAria">
         <!-- populated by JS -->
       </div>
       <div class="activity-legend">
@@ -172,7 +172,7 @@
   <!-- ── Starred ────────────────────────────────────────────────── -->
   <section id="starred" hidden>
     <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secStarred">~/starred</span></h2>
-    <p class="subnote" id="starred-note">repos i&rsquo;ve starred on github — live</p>
+    <p class="subnote" id="starred-note" data-i18n="starredNoteStatic">repos I&rsquo;ve starred on GitHub — live</p>
     <ul class="recent" id="starred-list"></ul>
   </section>
 
@@ -195,7 +195,7 @@
 
 <!-- ── Command palette ─────────────────────────────────────────── -->
 <div class="palette-overlay" id="palette" hidden>
-  <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette" dir="ltr">
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette" dir="ltr" data-i18n-aria="paletteAria">
     <div class="terminal-bar">
       <span class="dot dot-r" aria-hidden="true"></span>
       <span class="dot dot-y" aria-hidden="true"></span>
@@ -207,7 +207,7 @@
       <div class="palette-out" id="palette-out" aria-live="polite"></div>
       <div class="palette-inputline">
         <span class="line prompt-line" aria-hidden="true">$</span>
-        <input id="palette-input" type="text" autocomplete="off" spellcheck="false" aria-label="Enter a command">
+        <input id="palette-input" type="text" autocomplete="off" spellcheck="false" aria-label="Enter a command" data-i18n-aria="paletteInputAria">
       </div>
     </div>
   </div>

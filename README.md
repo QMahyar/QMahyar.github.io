@@ -22,6 +22,7 @@ The top-bar button toggles language (choice is remembered). Persian mode switche
 
 - Translations live in the `I18N` block in `script.js` (en / fa).
 - Persian project descriptions live in `CONFIG.describeFa`.
+- Persian feature bullets live in `CONFIG.highlightsFa` (falls back to English).
 
 ## Curating — edit the CONFIG block at the top of `script.js`
 
@@ -31,6 +32,8 @@ hideForks: true,                              // forks never shown
 featured: ["Telegram-Cli", ...],              // ✦ + highlights
 highlights: { "<repo>": ["bullet", ...] },    // feature bullets for featured repos
 describe:  { "<repo>": "custom description" },// optional description overrides
+describeFa: { "<repo>": "توضیح فارسی" },     // Persian description overrides
+highlightsFa: { "<repo>": ["نکته", ...] },    // Persian feature bullets (fallback: EN)
 links:     { "<repo>": {label, url} },        // extra links (npm is auto)
 groups:    [ { name, match: [keywords] } ],   // ordering + grouping rules
 starredLimit: 8,                              // rows in ~/starred
