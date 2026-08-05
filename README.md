@@ -16,6 +16,13 @@ The page fetches from the GitHub API on every load:
 
 If the API is unreachable it falls back to static data baked into `script.js`.
 
+## Bilingual — English / Persian
+
+The top-bar button toggles language (choice is remembered). Persian mode switches to RTL with the **Vazirmatn** font, Persian digits, and translated UI. The terminal, palette, and code stay in mono/LTR — like a real terminal inside a Persian page.
+
+- Translations live in the `I18N` block in `script.js` (en / fa).
+- Persian project descriptions live in `CONFIG.describeFa`.
+
 ## Curating — edit the CONFIG block at the top of `script.js`
 
 ```js
