@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,41 +15,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <!-- ================================================================
-     QMahyar.github.io — how to edit
-     ----------------------------------------------------------------
-     · Projects: <article class="project"> blocks in #projects.
-       Copy/delete a block to add/remove a project. Featured projects
-       carry <ul class="highlights"> — delete that for a compact row.
-     · Bio: <p> inside #about.  Metrics/language bars load live from
-       the GitHub API (see script.js) and fall back to the numbers
-       hardcoded there.
-     · Command palette: press / or Ctrl+K anywhere. Commands live in
-       script.js (PALETTE_CMDS).
+     QMahyar.github.io — bilingual (EN / FA)
+     · Content is managed in script.js: CONFIG (projects) + I18N (text)
+     · The top-bar button toggles language; choice is remembered.
      ================================================================ -->
 
 <header class="topbar" id="top">
   <a class="brand" href="#top"><span class="brand-dot" aria-hidden="true"></span>QMahyar</a>
   <nav aria-label="Sections">
-    <a href="#about">~/about</a>
-    <a href="#projects">~/projects</a>
-    <a href="#stack">~/stack</a>
-    <a href="#recent">~/recent</a>
-    <a href="#starred">~/starred</a>
-    <a href="#contact">~/contact</a>
+    <a href="#about" class="path" data-i18n="navAbout">~/about</a>
+    <a href="#projects" class="path" data-i18n="navProjects">~/projects</a>
+    <a href="#stack" class="path" data-i18n="navStack">~/stack</a>
+    <a href="#recent" class="path" data-i18n="navRecent">~/recent</a>
+    <a href="#starred" class="path" data-i18n="navStarred">~/starred</a>
+    <a href="#contact" class="path" data-i18n="navContact">~/contact</a>
   </nav>
-  <button class="palette-hint" id="palette-hint" aria-label="Open command palette">press <kbd>/</kbd> for commands</button>
+  <div class="topbar-actions">
+    <button class="lang-btn" id="lang-btn" data-i18n="langBtn" aria-label="Switch language">فارسی</button>
+    <button class="palette-hint" id="palette-hint" aria-label="Open command palette" data-i18n-html="paletteHint">press <kbd>/</kbd> for commands</button>
+  </div>
 </header>
 
 <main>
 
   <!-- ── Hero ──────────────────────────────────────────────────── -->
   <section class="hero" aria-label="Intro">
-    <div class="terminal" role="presentation">
+    <div class="terminal" role="presentation" dir="ltr">
       <div class="terminal-bar">
         <span class="dot dot-r" aria-hidden="true"></span>
         <span class="dot dot-y" aria-hidden="true"></span>
@@ -64,8 +61,8 @@
     </div>
 
     <div class="hero-text">
-      <h1 class="name">Hi, I&rsquo;m Mahyar.</h1>
-      <p class="lede">
+      <h1 class="name" data-i18n="name">Hi, I&rsquo;m Mahyar.</h1>
+      <p class="lede" data-i18n="lede">
         Developer &amp; security enthusiast from Iran. I build tools for Telegram,
         networking, and developer workflows — mostly in Go and TypeScript.
       </p>
@@ -74,26 +71,26 @@
 
   <!-- ── About + metrics ────────────────────────────────────────── -->
   <section id="about">
-    <h2><span class="prompt" aria-hidden="true">$</span> ~/about</h2>
-    <p class="about-text">
+    <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secAbout">~/about</span></h2>
+    <p class="about-text" data-i18n-html="aboutP1">
       I write practical tooling for Telegram and networking — MTProto CLIs, account
       managers, Cloudflare edge scanners — plus developer tools and terminal setups.
       Most of my work is in the open: if it&rsquo;s below and doesn&rsquo;t say
       <em>fork</em>, it&rsquo;s mine.
     </p>
-    <p class="about-text">
+    <p class="about-text" data-i18n-html="aboutP2">
       Currently building <a href="https://github.com/QMahyar/Telegram-Cli" target="_blank" rel="noopener">Telegram-Cli</a>
       — a schema-driven MTProto gateway that treats every Telegram account you own as one fleet.
     </p>
 
     <div class="metrics" id="metrics" aria-label="GitHub metrics">
-      <div class="metric"><span class="metric-num" id="m-repos">12</span><span class="metric-label">repos</span></div>
-      <div class="metric"><span class="metric-num" id="m-followers">7</span><span class="metric-label">followers</span></div>
-      <div class="metric"><span class="metric-num" id="m-following">14</span><span class="metric-label">following</span></div>
-      <div class="metric"><span class="metric-num" id="m-joined">2017</span><span class="metric-label">on github since</span></div>
+      <div class="metric"><span class="metric-num" id="m-repos">12</span><span class="metric-label" data-i18n="metricRepos">repos</span></div>
+      <div class="metric"><span class="metric-num" id="m-followers">7</span><span class="metric-label" data-i18n="metricFollowers">followers</span></div>
+      <div class="metric"><span class="metric-num" id="m-following">14</span><span class="metric-label" data-i18n="metricFollowing">following</span></div>
+      <div class="metric"><span class="metric-num" id="m-joined">2017</span><span class="metric-label" data-i18n="metricSince">on github since</span></div>
     </div>
 
-    <h3 class="subhead">language breakdown</h3>
+    <h3 class="subhead" data-i18n="subheadLangs">language breakdown</h3>
     <div class="langbars" id="langbars" aria-label="Languages by repository count">
       <!-- populated live from the GitHub API; static fallback in script.js -->
     </div>
@@ -101,23 +98,23 @@
 
   <!-- ── Projects ───────────────────────────────────────────────── -->
   <section id="projects">
-    <h2><span class="prompt" aria-hidden="true">$</span> ~/projects</h2>
+    <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secProjects">~/projects</span></h2>
 
     <div class="filterbar">
-      <label for="filter"><span class="prompt" aria-hidden="true">$</span> grep -i</label>
-      <input id="filter" type="text" placeholder="name, language, keyword…" autocomplete="off" spellcheck="false">
+      <label for="filter"><span class="prompt" aria-hidden="true">$</span> <span dir="ltr">grep -i</span></label>
+      <input id="filter" type="text" data-i18n-ph="filterPlaceholder" placeholder="name, language, keyword…" autocomplete="off" spellcheck="false">
     </div>
-    <p class="filter-count" id="filter-count" aria-live="polite">loading projects…</p>
+    <p class="filter-count" id="filter-count" aria-live="polite" data-i18n="filterLoading">loading projects…</p>
     <div id="projects-list">
-      <p class="subnote">fetching from the GitHub API…</p>
+      <p class="subnote" data-i18n="projectsLoading">fetching from the GitHub API…</p>
     </div>
   </section>
 
   <!-- ── Stack ──────────────────────────────────────────────────── -->
   <section id="stack">
-    <h2><span class="prompt" aria-hidden="true">$</span> ~/stack</h2>
+    <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secStack">~/stack</span></h2>
     <div class="chip-group">
-      <h3>languages</h3>
+      <h3 data-i18n="stackLanguages">languages</h3>
       <ul class="chips">
         <li>Go</li>
         <li>TypeScript</li>
@@ -126,9 +123,9 @@
       </ul>
     </div>
     <div class="chip-group">
-      <h3>platforms &amp; tools</h3>
+      <h3 data-i18n="stackPlatforms">platforms &amp; tools</h3>
       <ul class="chips">
-        <li>Windows / WSL</li>
+        <li data-i18n="chipWindows">Windows / WSL</li>
         <li>WezTerm</li>
         <li>GitHub Actions</li>
         <li>Telegram MTProto</li>
@@ -139,20 +136,20 @@
       </ul>
     </div>
     <div class="chip-group">
-      <h3>areas</h3>
+      <h3 data-i18n="stackAreas">areas</h3>
       <ul class="chips">
-        <li>Network tooling</li>
-        <li>Automation</li>
-        <li>CLI design</li>
-        <li>Local-first apps</li>
+        <li data-i18n="chipNetwork">Network tooling</li>
+        <li data-i18n="chipAutomation">Automation</li>
+        <li data-i18n="chipCli">CLI design</li>
+        <li data-i18n="chipLocal">Local-first apps</li>
       </ul>
     </div>
   </section>
 
   <!-- ── Recent ─────────────────────────────────────────────────── -->
   <section id="recent">
-    <h2><span class="prompt" aria-hidden="true">$</span> ~/recent</h2>
-    <p class="subnote">recently pushed — loaded live from the GitHub API</p>
+    <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secRecent">~/recent</span></h2>
+    <p class="subnote" data-i18n="recentNote">recently pushed — loaded live from the GitHub API</p>
     <ul class="recent" id="recent-list">
       <li><a href="https://github.com/QMahyar/Telegram-Cli">Telegram-Cli</a> <span class="muted">— last push …</span></li>
     </ul>
@@ -160,31 +157,31 @@
 
   <!-- ── Starred ────────────────────────────────────────────────── -->
   <section id="starred" hidden>
-    <h2><span class="prompt" aria-hidden="true">$</span> ~/starred</h2>
+    <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secStarred">~/starred</span></h2>
     <p class="subnote" id="starred-note">repos i&rsquo;ve starred on github — live</p>
     <ul class="recent" id="starred-list"></ul>
   </section>
 
   <!-- ── Contact ────────────────────────────────────────────────── -->
   <section id="contact">
-    <h2><span class="prompt" aria-hidden="true">$</span> ~/contact</h2>
+    <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secContact">~/contact</span></h2>
     <ul class="contact">
-      <li><a href="https://github.com/QMahyar" target="_blank" rel="noopener">github.com/QMahyar</a> <span class="muted">— code</span></li>
-      <li><a href="https://t.me/Qstickers" target="_blank" rel="noopener">t.me/Qstickers</a> <span class="muted">— telegram</span></li>
-      <li><a href="https://x.com/Mahyartdb" target="_blank" rel="noopener">x.com/Mahyartdb</a> <span class="muted">— twitter</span></li>
+      <li dir="ltr"><a href="https://github.com/QMahyar" target="_blank" rel="noopener">github.com/QMahyar</a> <span class="muted">— <span data-i18n="contactCode">code</span></span></li>
+      <li dir="ltr"><a href="https://t.me/Qstickers" target="_blank" rel="noopener">t.me/Qstickers</a> <span class="muted">— <span data-i18n="contactTelegram">telegram</span></span></li>
+      <li dir="ltr"><a href="https://x.com/Mahyartdb" target="_blank" rel="noopener">x.com/Mahyartdb</a> <span class="muted">— <span data-i18n="contactTwitter">twitter</span></span></li>
     </ul>
-    <p class="subnote">tip: press <kbd>/</kbd> or <kbd>Ctrl</kbd>+<kbd>K</kbd> anywhere on this page for commands</p>
+    <p class="subnote" data-i18n-html="contactTip">tip: press <kbd>/</kbd> or <kbd>Ctrl</kbd>+<kbd>K</kbd> anywhere on this page for commands</p>
   </section>
 
 </main>
 
 <footer>
-  <p>&copy; 2026 Mahyar <span class="muted">·</span> <a href="https://github.com/QMahyar/QMahyar.github.io" target="_blank" rel="noopener">site source</a> <span class="muted">·</span> <a href="#top">cd ~</a></p>
+  <p>&copy; 2026 Mahyar <span class="muted">·</span> <a href="https://github.com/QMahyar/QMahyar.github.io" target="_blank" rel="noopener" data-i18n="footerSource">site source</a> <span class="muted">·</span> <a href="#top">cd ~</a></p>
 </footer>
 
 <!-- ── Command palette ─────────────────────────────────────────── -->
 <div class="palette-overlay" id="palette" hidden>
-  <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette" dir="ltr">
     <div class="terminal-bar">
       <span class="dot dot-r" aria-hidden="true"></span>
       <span class="dot dot-y" aria-hidden="true"></span>

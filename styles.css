@@ -23,6 +23,7 @@
 
   --mono: "JetBrains Mono", "Caskaydia Mono", "Cascadia Mono", "Consolas",
           ui-monospace, "SF Mono", Menlo, monospace;
+  --fa: "Vazirmatn", "Segoe UI", system-ui, sans-serif;
   --maxw: 880px;
 }
 
@@ -43,6 +44,63 @@ body {
     linear-gradient(90deg, rgba(58, 58, 58, 0.07) 1px, transparent 1px);
   background-size: 44px 44px;
 }
+
+html[lang="fa"] body { font-family: var(--fa); }
+
+/* Persian needs connected letters — never letter-space the UI chrome */
+html[lang="fa"] .tag,
+html[lang="fa"] .status,
+html[lang="fa"] .subhead,
+html[lang="fa"] .project-group > h3,
+html[lang="fa"] .chip-group > h3,
+html[lang="fa"] .metric-label { letter-spacing: 0; }
+
+html[lang="fa"] .filterbar input { font-family: var(--fa); }
+
+/* RTL: mirror the project accent bar + highlight bullets */
+html[dir="rtl"] .project {
+  border-left: none;
+  border-right: 2px solid transparent;
+}
+html[dir="rtl"] .project:hover { border-right-color: var(--green); }
+
+html[dir="rtl"] .highlights li {
+  padding-left: 0;
+  padding-right: 16px;
+}
+html[dir="rtl"] .highlights li::before {
+  left: auto;
+  right: 0;
+}
+
+html[lang="fa"] .typewriter,
+html[lang="fa"] .terminal,
+html[lang="fa"] .palette { font-family: var(--mono); }
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-btn {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--green);
+  background: none;
+  border: 1px solid rgba(35, 240, 15, 0.4);
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.lang-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(35, 240, 15, 0.08);
+}
+
+html[lang="fa"] .lang-btn { font-family: var(--fa); }
 
 ::selection { background: var(--selection); color: #fff; }
 
@@ -650,4 +708,11 @@ footer p { margin: 0; color: var(--muted); font-size: 0.85rem; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ── Very small screens ───────────────────────────────────── */
+
+@media (max-width: 420px) {
+  .topbar { gap: 8px; }
+  .topbar nav { order: 3; width: 100%; justify-content: space-between; }
 }
