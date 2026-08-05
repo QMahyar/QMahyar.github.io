@@ -2,6 +2,7 @@
    To curate: edit CONFIG (projects) and I18N (text) below. No HTML edits needed.
    1. Language     2. Typewriter   3. Clock   4. Metrics   5. Language bars
    6. Recent       7. Auto projects 8. Starred 9. Grep filter 10. Palette
+   11. Activity heatmap
 */
 
 (function () {
@@ -49,7 +50,7 @@
       "Telegram-Cli": "تمام حسابهای تلگرامیت در یک ترمینال — با MTProto، بهعنوان یک کاربر واقعی.",
       "TeleManager": "مدیریت جلسههای محلی برای حسابهای تلگرام خودت — یک اپ تحت وب محلی؛ هیچ دادهای از دستگاه خارج نمیشود.",
       "Q-Manager": "اپ دسکتاپ چندسکویی برای اتوماسیون بازی گرگینه در تلگرام — مدیریت چندحسابه، تشخیص فاز و اجرای خودکار اکشنها.",
-      "Cloudflare-Scanner": "اندپوینتهای سالم Warp کلادفلر و IPهای پراکسی تمیز را پیدا کن — سریع، رایگان، بدون راهاندازی.",
+      "Cloudflare-Scanner": "اندپوینتهای س sağlıklı Warp کلادفلر و IPهای پراکسی تمیز را پیدا کن — سریع، رایگان، بدون راهاندازی.",
       "cli-maker": "تولیدکنندهی CLI — از روی مستندات API، رابطهای خط فرمان Go با کش محلی SQLite و دستورات ترکیبی میسازد.",
       "pi-9router": "افزونهی pi — گیتوی چندارائهدهنده برای ابزارهای چت، تصویر، گفتار، جستجو و واکشی.",
       "pi-exa-search": "افزونهی pi — جستجوی معنایی وب و واکشی صفحه با چرخش چندکلیدی و هایلایتها.",
@@ -104,11 +105,15 @@
       langBtn: "فارسی",
       statusActive: "active", statusArchived: "archived",
       releases: "releases",
+      activityLess: "less", activityMore: "more",
       projectsCount: function (n) { return n + " projects"; },
       projectsMatched: function (a, b) { return a + " / " + b + " matched"; },
       starredNote: function (shown, total) {
         return "repos i've starred on github — live · " +
           (total ? "top " + shown + " of " + total + " starred" : shown + " starred");
+      },
+      activityTip: function(count, date) {
+        return count + " contribution" + (count !== 1 ? "s" : "") + " on " + date;
       }
     },
     fa: {
@@ -137,11 +142,15 @@
       langBtn: "EN",
       statusActive: "فعال", statusArchived: "بایگانیشده",
       releases: "نسخهها",
+      activityLess: "کمتر", activityMore: "بیشتر",
       projectsCount: function (n) { return faD(n) + " پروژه"; },
       projectsMatched: function (a, b) { return faD(a) + " از " + faD(b) + " پیدا شد"; },
       starredNote: function (shown, total) {
         return "ریپوهایی که در گیتهاب ستاره دادهام — زنده · " +
           (total ? faD(shown) + " مورد از " + faD(total) : faD(shown) + " ستارهشده");
+      },
+      activityTip: function(count, date) {
+        return faD(count) + " مشارکت در " + date;
       }
     }
   };
@@ -165,6 +174,7 @@
   var lastStarred = null;
   var lastRecent = null;
   var lastMetrics = null;
+  var lastActivity = null;
 
   /* ═══════════════════════ 1. apply language ═════════════════════ */
 
@@ -198,6 +208,7 @@
     renderProjects(lastRepos);
     renderRecent(lastRecent);
     renderStarred(lastStarred);
+    renderActivity(lastActivity);
     applyFilter(filterInput ? filterInput.value : "");
   }
 
@@ -331,6 +342,12 @@
     if (el) el.textContent = val;
   }
 
+  function formatDate(iso) {
+    var d = new Date(iso);
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+  }
+
   /* ═══════════════════════ 4. Metrics ═══════════════════════════ */
 
   var FALLBACK_METRICS = { repos: 12, followers: 7, following: 14, joined: "2017" };
@@ -374,10 +391,14 @@
       row.className = "bar";
       row.innerHTML =
         '<span class="bar-label">' + esc(l.name) + "</span>" +
-        '<div class="bar-track"><div class="bar-fill" style="width:' + pct +
-        "%;background:" + l.color + '"></div></div>' +
+        '<div class="bar-track"><div class="bar-fill" style="width:0%;background:' + l.color + '"></div></div>' +
         '<span class="bar-pct">' + num(LANG, pct) + "%</span>";
       host.appendChild(row);
+      /* animate the bar fill */
+      requestAnimationFrame(function() {
+        var fill = row.querySelector(".bar-fill");
+        if (fill) fill.style.width = pct + "%";
+      });
     });
   }
 
@@ -727,6 +748,86 @@
     if (e.target === overlay) closePalette();
   });
 
+  /* ═══════════════════════ 11. Activity heatmap ═════════════════ */
+
+  function renderActivity(events) {
+    var host = document.getElementById("activity-grid");
+    if (!host) return;
+
+    if (!events || !events.length) {
+      /* generate placeholder grid */
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < 84; i++) {
+        var cell = document.createElement("span");
+        cell.className = "activity-cell";
+        cell.dataset.level = "0";
+        frag.appendChild(cell);
+      }
+      host.innerHTML = "";
+      host.appendChild(frag);
+      return;
+    }
+
+    lastActivity = events;
+
+    /* count events per day */
+    var dayCounts = {};
+    var earliest = Date.now();
+    var DAY_MS = 86400000;
+
+    events.forEach(function (ev) {
+      var d = ev.created_at ? new Date(ev.created_at) : null;
+      if (!d || isNaN(d.getTime())) return;
+      var key = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+      dayCounts[key] = (dayCounts[key] || 0) + 1;
+      if (d.getTime() < earliest) earliest = d.getTime();
+    });
+
+    /* build last ~16 weeks (112 days) ending today */
+    var today = new Date();
+    today.setHours(23, 59, 59, 999);
+    var endMs = today.getTime();
+    var weeks = 16;
+    var totalDays = weeks * 7;
+    var startMs = endMs - (totalDays - 1) * DAY_MS;
+
+    /* find max for scaling */
+    var maxCount = 1;
+    Object.keys(dayCounts).forEach(function (k) {
+      if (dayCounts[k] > maxCount) maxCount = dayCounts[k];
+    });
+
+    function level(count) {
+      if (!count) return 0;
+      var ratio = count / maxCount;
+      if (ratio <= 0.25) return 1;
+      if (ratio <= 0.5) return 2;
+      if (ratio <= 0.75) return 3;
+      return 4;
+    }
+
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < totalDays; i++) {
+      var cellDate = new Date(startMs + i * DAY_MS);
+      var key = cellDate.getFullYear() + "-" + String(cellDate.getMonth() + 1).padStart(2, "0") + "-" + String(cellDate.getDate()).padStart(2, "0");
+      var count = dayCounts[key] || 0;
+      var lv = level(count);
+
+      var cell = document.createElement("span");
+      cell.className = "activity-cell";
+      cell.dataset.level = String(lv);
+
+      if (count > 0) {
+        cell.dataset.tip = t("activityTip")(count, formatDate(cellDate.toISOString()));
+      }
+
+      frag.appendChild(cell);
+    }
+
+    host.innerHTML = "";
+    host.appendChild(frag);
+  }
+
   /* ═══════════════════════ boot ═════════════════════════════════ */
 
   var base = "https://api.github.com";
@@ -752,6 +853,7 @@
     return { name: r.name, url: r.url, when: relTime(LANG, null), pushed_at: null };
   }));
   renderStarred(FALLBACK_STARRED);
+  renderActivity(null);
 
   api(base + "/users/" + CONFIG.user)
     .then(function (u) {
@@ -791,4 +893,11 @@
   api(base + "/users/" + CONFIG.user + "/starred?per_page=100")
     .then(renderStarred)
     .catch(function () { /* fallback already rendered */ });
+
+  /* fetch activity events for heatmap */
+  api(base + "/users/" + CONFIG.user + "/events?per_page=100")
+    .then(function (events) {
+      renderActivity(events);
+    })
+    .catch(function () { renderActivity(null); });
 })();

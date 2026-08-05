@@ -146,9 +146,23 @@
     </div>
   </section>
 
-  <!-- ── Recent ─────────────────────────────────────────────────── -->
+  <!-- ── Activity ──────────────────────────────────────────────── -->
   <section id="recent">
     <h2><span class="prompt" aria-hidden="true">$</span> <span class="path" data-i18n="secRecent">~/recent</span></h2>
+    <div class="activity-grid-wrap">
+      <div class="activity-grid" id="activity-grid" aria-label="Contribution activity">
+        <!-- populated by JS -->
+      </div>
+      <div class="activity-legend">
+        <span class="muted" data-i18n="activityLess">less</span>
+        <span class="legend-cell" data-level="0"></span>
+        <span class="legend-cell" data-level="1"></span>
+        <span class="legend-cell" data-level="2"></span>
+        <span class="legend-cell" data-level="3"></span>
+        <span class="legend-cell" data-level="4"></span>
+        <span class="muted" data-i18n="activityMore">more</span>
+      </div>
+    </div>
     <p class="subnote" data-i18n="recentNote">recently pushed — loaded live from the GitHub API</p>
     <ul class="recent" id="recent-list">
       <li><a href="https://github.com/QMahyar/Telegram-Cli">Telegram-Cli</a> <span class="muted">— last push …</span></li>

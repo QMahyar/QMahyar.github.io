@@ -3,16 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 — command not found</title>
+<title>404 — cd ~</title>
+<meta name="theme-color" content="#0C0C0C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230C0C0C'/%3E%3Ctext x='4' y='23' font-family='monospace' font-size='18' fill='%2323F00F'%3E%E2%9D%AF_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<main class="page-404">
-  <p class="cmd">$ ls ./this/page</p>
-  <p class="big">404: command not found — no such page</p>
-  <p class="muted">the path you requested does not exist in this filesystem</p>
-  <a class="home" href="/">cd ~</a>
-</main>
+<div class="page-404">
+  <div class="terminal" dir="ltr" style="max-width: 480px; width: 100%;">
+    <div class="terminal-bar">
+      <span class="dot dot-r" aria-hidden="true"></span>
+      <span class="dot dot-y" aria-hidden="true"></span>
+      <span class="dot dot-g" aria-hidden="true"></span>
+      <span class="terminal-title">mahyar@github — ~</span>
+    </div>
+    <div class="terminal-body">
+      <div class="big">$ cd <span class="cmd" style="color: var(--text);">/this/page</span></div>
+      <p style="color: var(--red); margin: 8px 0 0;">bash: cd: /this/page: No such file or directory</p>
+      <p style="color: var(--muted); margin: 16px 0 0; font-size: 0.85rem;">
+        The page you're looking for doesn't exist.<br>
+        Maybe it moved, or you mistyped the URL.
+      </p>
+      <p style="margin: 20px 0 0;">
+        <a href="/" class="home" style="color: var(--cyan); border: 1px solid var(--border); padding: 8px 16px; border-radius: 4px; display: inline-block; transition: all 0.2s ease;">$ cd ~</a>
+      </p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
