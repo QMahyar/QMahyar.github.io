@@ -3,7 +3,7 @@ export const profile = {
 	role: 'Developer & Security Enthusiast',
 	location: 'Iran',
 	github: 'https://github.com/QMahyar',
-	telegram: 'https://t.me/Qstickers',
+	telegram: 'https://t.me/QMahyar',
 	twitter: 'https://x.com/Mahyartdb',
 	email: 'mailto:mahyartdb@gmail.com',
 	handle: '@Mahyartdb'
@@ -20,8 +20,13 @@ export interface Project {
 	archived?: boolean;
 }
 
+/** Proof-column rows for the flagship diptychs. Every value comes from the project's own description. */
+export interface Flagship extends Project {
+	spec: Array<{ key: string; value: string }>;
+}
+
 /** The two main projects — everything else orbits these. Both pure Rust. */
-export const flagships: Project[] = [
+export const flagships: Flagship[] = [
 	{
 		name: 'tele-cli',
 		url: 'https://github.com/QMahyar/tele-cli',
@@ -29,7 +34,14 @@ export const flagships: Project[] = [
 			'Drive real Telegram user accounts from the terminal — messages, chats, groups, contacts, live streaming. Name your accounts, fan commands out across all of them, get tables for humans or JSON for machines. Pure Rust on grammers, zero C dependencies.',
 		lang: 'Rust',
 		tags: ['MTProto', 'grammers', 'multi-account'],
-		updated: 'Aug 2026'
+		updated: 'Aug 2026',
+		spec: [
+			{ key: 'accounts', value: 'real users, named' },
+			{ key: 'commands', value: 'fanned across all' },
+			{ key: 'output', value: 'tables · json' },
+			{ key: 'scope', value: 'chats groups contacts' },
+			{ key: 'core', value: 'pure rust · grammers' }
+		]
 	},
 	{
 		name: 'cf-scanner',
@@ -39,7 +51,14 @@ export const flagships: Project[] = [
 		lang: 'Rust',
 		stars: 1,
 		tags: ['WARP', 'WireGuard', 'boringtun'],
-		updated: 'Aug 2026'
+		updated: 'Aug 2026',
+		spec: [
+			{ key: 'binary', value: 'one · cross-platform' },
+			{ key: 'tls scan', value: 'official ranges' },
+			{ key: 'warp', value: 'wireguard handshake' },
+			{ key: 'interface', value: 'cli · wizard · web ui' },
+			{ key: 'core', value: 'pure rust · boringtun' }
+		]
 	}
 ];
 

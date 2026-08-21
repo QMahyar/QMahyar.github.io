@@ -3,59 +3,73 @@
 	import type { Project } from '$lib/data/site';
 	import { langColor } from '$lib/data/site';
 
-	let { project, featured = false }: { project: Project; featured?: boolean } = $props();
+	let { project, compact = false }: { project: Project; compact?: boolean } = $props();
 </script>
 
-<a
-	href={project.url}
-	target="_blank"
-	rel="noopener noreferrer"
-	class="group glass relative flex flex-col gap-4 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-glow/30 hover:bg-white/[0.045] md:p-8"
->
-	<div class="flex items-start justify-between gap-4">
-		<h3 class="text-xl font-semibold text-fog transition-colors group-hover:text-glow md:text-2xl">
-			{project.name}
-		</h3>
-		{#if typeof project.stars === 'number'}
+{#if compact}
+	<!-- Ledger row -->
+	<li>
+		<a
+			href={project.url}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group flex items-baseline gap-4 py-4"
+		>
 			<span
-				class="mt-1 inline-flex shrink-0 items-center gap-1.5 font-mono text-sm text-dim"
-				aria-label="{project.stars} stars"
+				class="min-w-32 shrink-0 font-medium text-fog transition-colors duration-150 group-hover:text-glow md:min-w-44"
 			>
-				<Star size={14} aria-hidden="true" />
-				{project.stars}
+				{project.name}
+				{#if project.archived}
+					<span
+						class="ml-2 rounded border border-line px-1.5 py-0.5 align-middle machine text-[9px] tracking-wider text-dim uppercase"
+						>archived</span
+					>
+				{/if}
 			</span>
-		{/if}
-	</div>
-
-	<p class="flex-1 text-sm leading-relaxed text-mist">{project.description}</p>
-
-	<div class="flex flex-wrap items-center justify-between gap-3">
-		<div class="flex flex-wrap gap-2">
-			{#each project.tags as tag (tag)}
-				<span class="chip">{tag}</span>
-			{/each}
-		</div>
-		<span class="inline-flex items-center gap-2 font-mono text-xs text-dim">
-			{#if featured && project.updated}<span>{project.updated}</span>{/if}
-			<span
-				class="size-2.5 rounded-full"
-				style="background-color: {langColor[project.lang] ?? langColor.Other}"
-				aria-hidden="true"></span>
-			{project.lang}
-		</span>
-	</div>
-
-	<svg
-		class="absolute top-6 right-6 size-4 -translate-x-1 translate-y-1 text-glow opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 md:top-8 md:right-8"
-		viewBox="0 0 24 24"
-		fill="none"
-		stroke="currentColor"
-		stroke-width="2"
-		stroke-linecap="round"
-		stroke-linejoin="round"
-		aria-hidden="true"
-	>
-		<path d="M7 7h10v10" />
-		<path d="M7 17 17 7" />
-	</svg>
-</a>
+			<span class="hidden min-w-0 flex-1 truncate text-sm text-dim sm:block">
+				{project.description}
+			</span>
+			<span class="machine ml-auto inline-flex shrink-0 items-center gap-2 text-xs text-dim">
+				<span
+					class="size-2 rounded-full"
+					style="background-color: {langColor[project.lang] ?? langColor.Other}"
+					aria-hidden="true"></span>
+				{project.lang}
+			</span>
+		</a>
+	</li>
+{:else}
+	<!-- Ledger block -->
+	<li>
+		<a
+			href={project.url}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group block border-t border-line/50 pt-5"
+		>
+			<div class="flex items-baseline justify-between gap-4">
+				<h3
+					class="text-lg font-semibold tracking-tight text-fog transition-colors duration-150 group-hover:text-glow"
+				>
+					{project.name}
+				</h3>
+				<span class="machine inline-flex shrink-0 items-center gap-1.5 text-xs text-dim">
+					{#if typeof project.stars === 'number'}
+						<Star size={12} aria-hidden="true" />
+						{project.stars}
+					{/if}
+				</span>
+			</div>
+			<p class="mt-2 text-sm leading-relaxed">{project.description}</p>
+			<p class="machine mt-3 inline-flex items-center gap-2 text-xs text-dim">
+				<span
+					class="size-2 rounded-full"
+					style="background-color: {langColor[project.lang] ?? langColor.Other}"
+					aria-hidden="true"></span>
+				{project.lang}
+				{#if project.updated}<span aria-hidden="true">&middot;</span>
+					<span>{project.updated}</span>{/if}
+			</p>
+		</a>
+	</li>
+{/if}

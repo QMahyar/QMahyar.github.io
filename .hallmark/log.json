@@ -1,0 +1,12 @@
+[
+	{
+		"date": "2026-08-22",
+		"macrostructure": "Split Studio",
+		"theme": "Midnight (Campbell-Vivid tuned)",
+		"axes": { "paper": "dark (<30%)", "display": "geometric-sans (Space Grotesk)", "accent": "cool (cyan 195)" },
+		"enrichment": "kept hand-built NetworkCanvas + typographic terminal specs",
+		"nav": "N9 edge-aligned minimal",
+		"footer": "Ft5 statement",
+		"brief": "QMahyar.github.io · dev/security portfolio · refined atmospheric redesign"
+	}
+]

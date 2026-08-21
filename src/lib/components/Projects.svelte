@@ -1,148 +1,86 @@
 <script lang="ts">
-	import { ArrowRight } from '@lucide/svelte';
 	import SectionHeading from './SectionHeading.svelte';
 	import ProjectCard from './ProjectCard.svelte';
-	import { flagships, projects, moreProjects, langColor, profile } from '$lib/data/site';
-	import { reveal } from '$lib/actions/reveal';
+	import { flagships, projects, moreProjects, profile } from '$lib/data/site';
 </script>
 
 <section id="projects" class="relative scroll-mt-20 py-28 md:py-36">
 	<div class="mx-auto max-w-6xl px-6">
 		<SectionHeading
-			index="01"
-			label="selected work"
 			title="Built in the open."
 			blurb="Two flagships carry the flag — both Rust, both alive. The full catalogue lives on GitHub."
 		/>
 
-		<!-- Flagship pair -->
-		<div class="grid gap-5 lg:grid-cols-2">
+		<!-- Split Studio diptychs — text and proof alternate direction -->
+		<div class="flex flex-col gap-24 md:gap-32">
 			{#each flagships as project, i (project.name)}
-				<div use:reveal={{ delay: i * 90 }} class="h-full">
-					<article
-						class="glass group relative h-full overflow-hidden transition-colors duration-300 hover:border-glow/30"
-					>
-						<div
-							class="pointer-events-none absolute inset-0 opacity-70"
-							style="background: radial-gradient(26rem 16rem at 85% 0%, rgba(47,168,238,0.10), transparent 65%);"
-							aria-hidden="true"
-						></div>
-
-						<!-- corner radar -->
-						<div
-							class="pointer-events-none absolute -top-8 -right-8 size-36 opacity-60"
-							aria-hidden="true"
-						>
-							<div class="absolute inset-[12%] rounded-full border border-beam/25"></div>
-							<div class="absolute inset-[32%] rounded-full border border-beam/15"></div>
-							<div
-								class="animate-sweep absolute inset-[12%] rounded-full"
-								style="background: conic-gradient(from 0deg, rgba(121,234,234,0.25), transparent 22%);"
-							></div>
-							<span
-								class="animate-blip absolute top-[38%] left-[58%] size-1 rounded-full bg-glow shadow-[0_0_10px_rgba(121,234,234,0.9)]"
-								style="animation-delay: {i * 1.3}s"></span>
-						</div>
-
-						<div class="relative flex h-full flex-col p-7 md:p-10">
-							<p class="font-mono text-[11px] tracking-[0.28em] text-glow uppercase">
-								flagship &middot; rust
-							</p>
-							<h3 class="mt-3 text-3xl font-bold tracking-tight text-fog md:text-4xl">
-								<a
-									href={project.url}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="transition-colors hover:text-glow"
-								>
-									{project.name}
-								</a>
-							</h3>
-							<p class="mt-4 max-w-md leading-relaxed text-mist">{project.description}</p>
-
-							<div class="mt-6 flex flex-wrap items-center gap-2.5">
-								{#each project.tags as tag (tag)}
-									<span class="chip">{tag}</span>
-								{/each}
-							</div>
-
-							<p
-								class="mt-auto inline-flex items-center gap-2 pt-8 font-mono text-sm text-dim"
+				{@const flip = i % 2 === 1}
+				<article
+					class="grid min-w-0 items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20"
+				>
+				<div class="min-w-0 {flip ? 'md:order-2' : ''}">
+						<p class="machine text-xs tracking-[0.08em] text-dim uppercase">
+							flagship &middot; rust &middot; {project.updated}
+						</p>
+						<h3 class="mt-3 text-3xl tracking-tight md:text-4xl">
+							<a
+								href={project.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="transition-colors duration-150 hover:text-glow"
 							>
-								<span>{project.lang}</span>
-								{#if typeof project.stars === 'number'}
-									<span aria-hidden="true">&middot;</span><span>{project.stars} stars</span>
-								{/if}
-								<span aria-hidden="true">&middot;</span>
-								<a
-									href={project.url}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="inline-flex items-center gap-1.5 text-glow transition-colors hover:text-fog"
-								>
-									view repo <ArrowRight size={15} aria-hidden="true" />
-								</a>
-							</p>
-						</div>
-					</article>
-				</div>
-			{/each}
-		</div>
-
-		<div class="mt-5 grid gap-5 sm:grid-cols-2">
-			{#each projects as project, i (project.name)}
-				<div use:reveal={{ delay: (i % 2) * 80 }}>
-					<ProjectCard {project} featured />
-				</div>
-			{/each}
-		</div>
-
-		<div use:reveal class="mt-16">
-			<p class="mb-2 font-mono text-xs tracking-[0.28em] text-dim uppercase">// also on github</p>
-			<ul class="divide-y divide-white/5">
-				{#each moreProjects as project (project.name)}
-					<li>
-						<a
-							href={project.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="group flex items-baseline gap-4 py-4 transition-colors"
-						>
-							<span class="min-w-32 font-medium text-fog transition-colors group-hover:text-glow md:min-w-44">
 								{project.name}
-								{#if project.archived}
-									<span
-										class="ml-2 rounded border border-white/10 px-1.5 py-0.5 align-middle font-mono text-[9px] tracking-wider text-dim uppercase"
-										>archived</span
-									>
-								{/if}
-							</span>
-							<span class="hidden flex-1 truncate text-sm text-dim sm:block">
-								{project.description}
-							</span>
-							<span class="ml-auto inline-flex shrink-0 items-center gap-2 font-mono text-xs text-dim">
-								<span
-									class="size-2 rounded-full"
-									style="background-color: {langColor[project.lang] ?? langColor.Other}"
-									aria-hidden="true"></span>
-								{project.lang}
-							</span>
-							<ArrowRight
-								size={14}
-								class="shrink-0 text-dim opacity-0 transition-all group-hover:translate-x-0.5 group-hover:text-glow group-hover:opacity-100"
-								aria-hidden="true"
-							/>
-						</a>
-					</li>
+							</a>
+						</h3>
+						<p class="mt-5 max-w-md leading-relaxed">{project.description}</p>
+						<p class="mt-7">
+							<a
+								href={project.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="link-arrow machine text-sm"
+							>
+								view repo <span aria-hidden="true">&nearr;</span>
+							</a>
+						</p>
+					</div>
+
+				<div class="surface min-w-0 p-6 md:p-8 {flip ? 'md:order-1' : ''}">
+						<p class="term-label">{project.name} &middot; spec</p>
+						<dl class="divide-y divide-line/60">
+							{#each project.spec as row (row.key)}
+								<div class="flex items-baseline justify-between gap-4 py-2.5 first:pt-0 last:pb-0">
+									<dt class="machine shrink-0 text-[13px] text-dim">{row.key}</dt>
+									<dd class="machine text-right text-[13px] text-fog">{row.value}</dd>
+								</div>
+							{/each}
+						</dl>
+					</div>
+				</article>
+			{/each}
+		</div>
+
+		<!-- Ledger — the smaller repos as an index -->
+		<div class="mt-28 md:mt-36">
+			<div class="grid gap-x-10 gap-y-5 sm:grid-cols-2">
+				{#each projects as project (project.name)}
+					<ProjectCard {project} />
+				{/each}
+			</div>
+
+			<ul class="mt-20 divide-y divide-line/50 border-t border-line/50">
+				{#each moreProjects as project (project.name)}
+					<ProjectCard {project} compact />
 				{/each}
 			</ul>
-			<p class="mt-8 font-mono text-sm text-dim">
+
+			<p class="mt-10 machine text-sm text-dim">
 				&rarr; everything else:
 				<a
 					href={profile.github}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-mist underline decoration-white/20 underline-offset-4 transition-colors hover:text-glow"
+					class="text-mist underline decoration-line underline-offset-4 transition-colors duration-150 hover:text-glow"
 					>github.com/QMahyar</a
 				>
 			</p>

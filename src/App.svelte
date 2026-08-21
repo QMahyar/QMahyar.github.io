@@ -13,7 +13,7 @@
 	Skip to content
 </a>
 
-<div class="grain relative">
+<div class="grain atmosphere relative">
 	<Nav />
 	<main>
 		<Hero />
