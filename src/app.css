@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+	/* WezTerm palette — Campbell-Vivid */
+	--color-void: #0c0c0c;
+	--color-abyss: #101013;
+	--color-panel: #141417;
+	--color-line: #232327;
+	--color-fog: #e8e8e8;
+	--color-mist: #a9a9b0;
+	--color-dim: #6f6f77;
+	--color-glow: #79eaea;
+	--color-beam: #2fa8ee;
+	--color-pulse: #23f00f;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		background-color: var(--color-void);
+		color: var(--color-fog);
+		font-family: var(--font-display);
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+		overflow-x: clip;
+	}
+
+	::selection {
+		background-color: #264f78;
+		color: #ffffff;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-glow);
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+	::-webkit-scrollbar-track {
+		background: var(--color-void);
+	}
+	::-webkit-scrollbar-thumb {
+		background: #2a2a2e;
+		border-radius: 5px;
+		border: 2px solid var(--color-void);
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #3a3a40;
+	}
+}
+
+@layer components {
+	.glass {
+		border-radius: 1rem;
+		border: 1px solid rgb(255 255 255 / 0.07);
+		background-color: rgb(255 255 255 / 0.025);
+		backdrop-filter: blur(6px);
+	}
+
+	.chip {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-mist);
+		border: 1px solid rgb(255 255 255 / 0.09);
+		border-radius: 999px;
+		padding: 0.25rem 0.7rem;
+		white-space: nowrap;
+	}
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────── */
+.reveal {
+	opacity: 0;
+	transform: translateY(26px);
+	transition:
+		opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: opacity, transform;
+}
+.reveal.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* ── Film grain overlay ────────────────────────────────────── */
+.grain::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 60;
+	pointer-events: none;
+	opacity: 0.05;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	background-size: 180px 180px;
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes blink-cursor {
+	50% {
+		opacity: 0;
+	}
+}
+.animate-blink {
+	animation: blink-cursor 1.1s steps(1) infinite;
+}
+
+@keyframes rotate-sweep {
+	to {
+		transform: rotate(360deg);
+	}
+}
+.animate-sweep {
+	animation: rotate-sweep 7s linear infinite;
+}
+
+@keyframes blip {
+	0%,
+	100% {
+		opacity: 0.15;
+	}
+	12% {
+		opacity: 1;
+	}
+}
+.animate-blip {
+	animation: blip 3.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+	.reveal {
+		opacity: 1;
+		transform: none;
+	}
+}
