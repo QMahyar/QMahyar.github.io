@@ -5,6 +5,7 @@ export const profile = {
 	github: 'https://github.com/QMahyar',
 	telegram: 'https://t.me/Qstickers',
 	twitter: 'https://x.com/Mahyartdb',
+	email: 'mailto:mahyartdb@gmail.com',
 	handle: '@Mahyartdb'
 } as const;
 
@@ -19,17 +20,30 @@ export interface Project {
 	archived?: boolean;
 }
 
-export const featured: Project[] = [
+/** The two main projects — everything else orbits these. Both pure Rust. */
+export const flagships: Project[] = [
 	{
-		name: 'Cloudflare-Scanner',
-		url: 'https://github.com/QMahyar/Cloudflare-Scanner',
+		name: 'tele-cli',
+		url: 'https://github.com/QMahyar/tele-cli',
 		description:
-			'Cloudflare WARP endpoint & IP scanner built on xray-core — UDP noise support, live results, and batch apply straight into your configs.',
-		lang: 'Go',
-		stars: 9,
-		tags: ['xray-core', 'UDP noise', 'WARP'],
+			'Drive real Telegram user accounts from the terminal — messages, chats, groups, contacts, live streaming. Name your accounts, fan commands out across all of them, get tables for humans or JSON for machines. Pure Rust on grammers, zero C dependencies.',
+		lang: 'Rust',
+		tags: ['MTProto', 'grammers', 'multi-account'],
 		updated: 'Aug 2026'
 	},
+	{
+		name: 'cf-scanner',
+		url: 'https://github.com/QMahyar/cf-scanner',
+		description:
+			'One cross-platform Rust binary that finds working Cloudflare endpoints on ISP-restricted networks — TLS scans across official ranges, WARP discovery through real WireGuard handshakes, driven by CLI, wizard, or browser UI.',
+		lang: 'Rust',
+		stars: 1,
+		tags: ['WARP', 'WireGuard', 'boringtun'],
+		updated: 'Aug 2026'
+	}
+];
+
+export const projects: Project[] = [
 	{
 		name: 'warp-generator',
 		url: 'https://github.com/QMahyar/warp-generator',
@@ -72,40 +86,12 @@ export const featured: Project[] = [
 
 export const moreProjects: Project[] = [
 	{
-		name: 'cf-scanner',
-		url: 'https://github.com/QMahyar/cf-scanner',
-		description: '',
-		lang: 'Rust',
-		stars: 1,
-		tags: [],
-		updated: 'Aug 2026'
-	},
-	{
-		name: 'tele-cli',
-		url: 'https://github.com/QMahyar/tele-cli',
-		description: '',
-		lang: 'Rust',
-		tags: [],
-		updated: 'Aug 2026'
-	},
-	{
 		name: 'pi-ask',
 		url: 'https://github.com/QMahyar/pi-ask',
 		description:
 			'Structured choice and text forms for agent-user decisions. ask_user extension for the pi coding agent.',
 		lang: 'TypeScript',
 		tags: [],
-		updated: 'Aug 2026'
-	},
-	{
-		name: 'Telegram-Cli',
-		url: 'https://github.com/QMahyar/Telegram-Cli',
-		description:
-			'Telegram MTProto CLI: multi-account sync, search, cross-account broadcasts, and raw gateway.',
-		lang: 'Go',
-		stars: 1,
-		tags: [],
-		archived: true,
 		updated: 'Aug 2026'
 	},
 	{
@@ -185,7 +171,7 @@ export const stack = [
 ] as const;
 
 export const stats = [
-	{ value: '18', label: 'public repos' },
-	{ value: '9\u2605', label: 'top project' },
+	{ value: '16', label: 'public repos' },
+	{ value: '\u221e', label: 'ports pending' },
 	{ value: '2026', label: 'still shipping' }
 ] as const;

@@ -23,7 +23,7 @@
 				use:reveal
 				class="font-mono text-xs tracking-[0.32em] text-glow/90 uppercase md:text-sm"
 			>
-				// developer &amp; security enthusiast
+				// rust &middot; telegram &middot; network tooling
 			</p>
 
 			<h1
@@ -34,13 +34,14 @@
 			</h1>
 
 			<p use:reveal={{ delay: 180 }} class="mt-7 max-w-xl text-lg leading-relaxed text-mist md:text-xl">
-				I build sharp tools for Telegram, networking, and developer workflows — scanners,
-				generators, and automations that live close to the wire.
+				I build sharp tools for Telegram and the networks they run on — MTProto CLIs,
+				endpoint scanners, developer automation.
+				<span class="text-fog">Everything worth keeping gets ported to Rust.</span>
 			</p>
 
 			<div use:reveal={{ delay: 260 }} class="mt-9 flex flex-wrap items-center gap-4">
 				<span
-					class="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-sm text-mist"
+					class="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 font-mono text-sm text-mist"
 				>
 					<span class="relative flex size-2" aria-hidden="true">
 						<span
@@ -48,7 +49,7 @@
 						></span>
 						<span class="relative inline-flex size-2 rounded-full bg-pulse"></span>
 					</span>
-					Shipping open source from Iran
+					porting the whole toolbox to rust
 				</span>
 			</div>
 
@@ -81,8 +82,7 @@
 						<dd class="font-mono text-2xl font-semibold text-fog">{stat.value}</dd>
 					</div>
 				{/each}
-			</dl>
-		</div>
+			</dl>		</div>
 	</div>
 
 	<div
