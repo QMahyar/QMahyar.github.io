@@ -3,11 +3,13 @@
 	import { profile } from '$lib/data/site';
 </script>
 
-<!-- H1 · Marquee — the statement fills the fold, bottom-anchored, left-biased -->
-<section id="top" class="relative flex min-h-svh flex-col overflow-hidden">
+<!-- H1 · Marquee — full-fold bottom-anchored statement on md+, compact flow on phones -->
+<section id="top" class="relative flex flex-col overflow-hidden md:min-h-svh">
 	<NetworkCanvas />
 
-	<div class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-end px-6 pt-20 pb-24">
+	<div
+		class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 pt-24 pb-16 md:justify-end md:pb-24"
+	>
 		<div class="w-full">
 			<p class="enter machine text-sm text-mist" style="--i: 0">
 				<span class="text-dim">$</span> mahyar --rust --telegram --network-tooling<span
