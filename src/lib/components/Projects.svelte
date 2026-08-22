@@ -20,7 +20,7 @@
 				<article
 					class="grid min-w-0 items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20"
 				>
-					<div class="min-w-0 {flip ? 'md:order-2' : ''}" use:reveal={{ delay: flip ? 90 : 0 }}>
+					<div class="min-w-0 {flip ? 'md:order-2' : ''}" use:reveal={{ delay: flip ? 90 : 0 }} data-variant="diptych">
 						<p class="machine text-xs tracking-[0.08em] text-dim uppercase">
 							flagship &middot; rust &middot; {project.updated}
 						</p>
@@ -51,6 +51,7 @@
 						class="surface spot min-w-0 p-6 md:p-8 {flip ? 'md:order-1' : ''}"
 						use:reveal={{ delay: flip ? 0 : 90 }}
 						use:spotlight
+						data-variant="diptych"
 					>
 						<p class="term-label">{project.name} &middot; spec</p>
 						<dl class="divide-y divide-line/60">
@@ -70,7 +71,7 @@
 		<div class="mt-28 md:mt-36">
 			<div class="grid gap-x-10 gap-y-5 sm:grid-cols-2">
 				{#each projects as project, i (project.name)}
-					<ProjectCard {project} delay={i * 70} />
+					<ProjectCard {project} delay={i * 45} />
 				{/each}
 			</div>
 

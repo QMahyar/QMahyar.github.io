@@ -27,10 +27,13 @@
 	<NetworkCanvas />
 
 	<div
-		class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 pt-24 pb-16 md:justify-end md:pb-24"
+		class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 pt-24 pb-16 md:justify-end md:pb-16"
 	>
 		<div class="w-full">
-			<p class="enter machine text-sm text-mist" style="--i: 0">
+			<p
+				class="enter machine text-xs leading-relaxed sm:text-sm text-mist max-sm:break-words"
+				style="--i: 0"
+			>
 				<span class="sr-only">$ {command}</span>
 				<span aria-hidden="true">
 					<span class="text-dim">$</span> {typed}<span class="caret"></span>

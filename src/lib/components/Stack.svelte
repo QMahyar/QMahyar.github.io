@@ -15,7 +15,7 @@
 
 		<div class="grid gap-x-16 gap-y-14 lg:grid-cols-[1fr_1fr_0.8fr]">
 			{#each stack as group, i (group.title)}
-				<div class="min-w-0" use:reveal={{ delay: i * 90 }}>
+				<div class="min-w-0" use:reveal={{ delay: i * 90 }} data-variant="stack">
 					<h3 class="text-lg font-semibold tracking-tight text-fog">{group.title}</h3>
 					<!-- F3 · tabular spec sheet — rows, hairline rules, no cards -->
 					<dl class="mt-5 divide-y divide-line/50 border-t border-line/50">

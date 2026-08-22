@@ -71,9 +71,11 @@
 			packets.length = 0;
 			const count = Math.max(24, Math.min(85, Math.floor((width * height) / 16000)));
 			for (let i = 0; i < count; i++) {
+				// Bias a couple of early nodes toward the hero wordmark area
+				const biased = i < 2 && width > 600;
 				nodes.push({
-					x: Math.random() * width,
-					y: Math.random() * height,
+					x: biased ? Math.random() * width * 0.22 : Math.random() * width,
+					y: biased ? Math.random() * height * 0.32 : Math.random() * height,
 					vx: (Math.random() - 0.5) * 0.35,
 					vy: (Math.random() - 0.5) * 0.35,
 					r: Math.random() * 1.1 + 1,

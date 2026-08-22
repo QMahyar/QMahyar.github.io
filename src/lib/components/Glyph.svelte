@@ -26,22 +26,24 @@
 
 	function makeGlyph(seedStr: string): { nodes: Node[]; edges: [number, number][]; accent: number } {
 		const rand = mulberry32(hash(seedStr));
-		const count = 4 + Math.floor(rand() * 2);
+		const count = 3 + Math.floor(rand() * 2);
 		const nodes: Node[] = [];
 		for (let i = 0; i < count; i++) {
-			const r = 1.5 + rand() * 1.4;
+			const r = 2.1 + rand() * 1.2;
 			let x = 0;
 			let y = 0;
 			for (let tries = 0; tries < 24; tries++) {
-				x = 7 + rand() * 34;
-				y = 7 + rand() * 34;
-				if (nodes.every((p) => Math.hypot(p.x - x, p.y - y) >= 12)) break;
+				x = 8 + rand() * 32;
+				y = 8 + rand() * 32;
+				if (nodes.every((p) => Math.hypot(p.x - x, p.y - y) >= 14)) break;
 			}
 			nodes.push({ x, y, r });
 		}
+		// Structured shape: open polyline that bends like a Q-tail, plus one chord for closure
 		const edges: [number, number][] = [];
 		for (let i = 0; i < nodes.length - 1; i++) edges.push([i, i + 1]);
-		if (nodes.length > 3 && rand() > 0.45) edges.push([0, nodes.length - 1]);
+		if (nodes.length === 3 && rand() > 0.5) edges.push([0, 2]);
+		else if (nodes.length === 4 && rand() > 0.45) edges.push([0, 3]);
 		return { nodes, edges, accent: Math.floor(rand() * nodes.length) };
 	}
 
@@ -69,7 +71,7 @@
 			x2={glyph.nodes[b].x}
 			y2={glyph.nodes[b].y}
 			stroke="var(--color-line)"
-			stroke-width="1.5"
+			stroke-width="1.8"
 		/>
 	{/each}
 	{#each glyph.nodes as node, i (i)}
