@@ -22,12 +22,12 @@
 	});
 </script>
 
-<!-- H1 · Marquee — full-fold bottom-anchored statement on md+, compact flow on phones -->
-<section id="top" class="relative flex flex-col overflow-hidden md:min-h-svh">
+<!-- H1 · Marquee — centered in the fold so the first paint lands on content -->
+<section id="top" class="relative flex flex-col overflow-hidden md:min-h-[78svh]">
 	<NetworkCanvas />
 
 	<div
-		class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 pt-24 pb-16 md:justify-end md:pb-16"
+		class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 pt-24 pb-16 md:pt-20 md:pb-20"
 	>
 		<div class="w-full">
 			<p
