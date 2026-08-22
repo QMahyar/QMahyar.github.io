@@ -22,7 +22,7 @@
 	/* Ink steps */
 	--color-fog: oklch(94% 0.005 255);
 	--color-mist: oklch(79% 0.008 255);
-	--color-dim: oklch(63% 0.01 255);
+	--color-dim: oklch(70% 0.01 255);
 
 	/* Single chromatic accent — Campbell-Vivid cyan, reserved for ≤5% of any view */
 	--color-glow: oklch(85% 0.115 195);

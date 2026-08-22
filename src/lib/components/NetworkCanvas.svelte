@@ -107,7 +107,7 @@
 				const na = nodes[a];
 				const nb = nodes[b];
 				const dist = Math.hypot(na.x - nb.x, na.y - nb.y);
-				const alpha = (1 - dist / LINK_DIST) * (staticFrame ? 0.4 : 0.32);
+				const alpha = (1 - dist / LINK_DIST) * (staticFrame ? 0.28 : 0.22);
 				g.strokeStyle = rgba(BEAM, alpha);
 				g.lineWidth = 1;
 				g.beginPath();
@@ -123,7 +123,7 @@
 				const dy = n.y - mouse.y;
 				const dist = Math.hypot(dx, dy);
 				if (dist < 170) {
-					const alpha = (1 - dist / 170) * 0.45;
+					const alpha = (1 - dist / 170) * 0.32;
 					g.strokeStyle = rgba(GLOW, alpha);
 					g.lineWidth = 1;
 					g.beginPath();
@@ -136,7 +136,7 @@
 
 		function drawNodes() {
 			for (const n of nodes) {
-				g.fillStyle = rgba(n.cyan ? GLOW : FOG, n.cyan ? 0.9 : 0.55);
+				g.fillStyle = rgba(n.cyan ? GLOW : FOG, n.cyan ? 0.72 : 0.42);
 				g.beginPath();
 				g.arc(n.x, n.y, n.r + (n.cyan ? 0.6 : 0), 0, Math.PI * 2);
 				g.fill();

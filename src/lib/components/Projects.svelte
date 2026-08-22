@@ -56,9 +56,9 @@
 						<p class="term-label">{project.name} &middot; spec</p>
 						<dl class="divide-y divide-line/60">
 							{#each project.spec as row (row.key)}
-								<div class="flex items-baseline justify-between gap-4 py-2.5 first:pt-0 last:pb-0">
-									<dt class="machine shrink-0 text-[13px] text-dim">{row.key}</dt>
-									<dd class="machine text-right text-[13px] text-fog">{row.value}</dd>
+								<div class="flex flex-col gap-1 py-2.5 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+									<dt class="machine text-[13px] text-dim">{row.key}</dt>
+									<dd class="machine text-[13px] text-fog sm:text-right">{row.value}</dd>
 								</div>
 							{/each}
 						</dl>

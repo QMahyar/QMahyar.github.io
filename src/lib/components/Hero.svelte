@@ -24,7 +24,14 @@
 
 <!-- H1 · Marquee — centered in the fold so the first paint lands on content -->
 <section id="top" class="relative flex flex-col overflow-hidden md:min-h-[78svh]">
-	<NetworkCanvas />
+	<div class="absolute inset-0 opacity-60 sm:opacity-80" aria-hidden="true">
+		<NetworkCanvas />
+	</div>
+	<!-- soft veil behind the headline so the canvas never competes with text -->
+	<div
+		class="pointer-events-none absolute inset-0 bg-[radial-gradient(42rem_28rem_at_26%_44%,oklch(15%_0.008_255/_0.88),transparent_68%)] max-sm:bg-[radial-gradient(32rem_22rem_at_28%_40%,oklch(15%_0.008_255/_0.9),transparent_72%)]"
+		aria-hidden="true"
+	></div>
 
 	<div
 		class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 pt-24 pb-16 md:pt-20 md:pb-20"

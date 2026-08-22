@@ -20,15 +20,20 @@
 		? 'border-transparent bg-void/85 backdrop-blur-md'
 		: 'border-transparent'}"
 >
-	<nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6" aria-label="Main">
-		<a href="#top" class="machine text-lg font-semibold tracking-tight text-fog">
+	<nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-6" aria-label="Main">
+		<a href="#top" class="machine shrink-0 text-lg font-semibold tracking-tight text-fog">
 			Q<span class="text-glow">_</span>
 		</a>
+		<div class="hidden items-center gap-6 md:flex" aria-label="Sections">
+			<a href="#projects" class="machine text-sm tracking-wide text-dim transition-colors duration-150 hover:text-fog">projects</a>
+			<a href="#stack" class="machine text-sm tracking-wide text-dim transition-colors duration-150 hover:text-fog">stack</a>
+			<a href="#contact" class="machine text-sm tracking-wide text-dim transition-colors duration-150 hover:text-fog">contact</a>
+		</div>
 		<a
 			href={profile.telegram}
 			target="_blank"
 			rel="noopener noreferrer"
-			class="link-arrow machine text-sm min-h-11 items-center"
+			class="link-arrow machine ml-auto shrink-0 text-sm min-h-11 items-center md:ml-0"
 		>
 			say hello <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 		</a>
