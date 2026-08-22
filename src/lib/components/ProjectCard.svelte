@@ -1,20 +1,27 @@
 <script lang="ts">
 	import { Star } from '@lucide/svelte';
+	import { reveal } from '$lib/actions/reveal';
+	import Glyph from './Glyph.svelte';
 	import type { Project } from '$lib/data/site';
 	import { langColor } from '$lib/data/site';
 
-	let { project, compact = false }: { project: Project; compact?: boolean } = $props();
+	let {
+		project,
+		compact = false,
+		delay = 0
+	}: { project: Project; compact?: boolean; delay?: number } = $props();
 </script>
 
 {#if compact}
 	<!-- Ledger row -->
-	<li>
+	<li use:reveal={{ delay }}>
 		<a
 			href={project.url}
 			target="_blank"
 			rel="noopener noreferrer"
 			class="group flex items-baseline gap-4 py-4"
 		>
+			<Glyph seed={project.name} size={20} class="relative top-0.5 shrink-0 opacity-70 transition-opacity duration-150 group-hover:opacity-100" />
 			<span
 				class="min-w-32 shrink-0 font-medium text-fog transition-colors duration-150 group-hover:text-glow md:min-w-44"
 			>
@@ -40,17 +47,18 @@
 	</li>
 {:else}
 	<!-- Ledger block -->
-	<li>
+	<li use:reveal={{ delay }}>
 		<a
 			href={project.url}
 			target="_blank"
 			rel="noopener noreferrer"
 			class="group block border-t border-line/50 pt-5"
 		>
-			<div class="flex items-baseline justify-between gap-4">
+			<div class="flex items-start justify-between gap-4">
 				<h3
-					class="text-lg font-semibold tracking-tight text-fog transition-colors duration-150 group-hover:text-glow"
+					class="flex items-center gap-3 text-lg font-semibold tracking-tight text-fog transition-colors duration-150 group-hover:text-glow"
 				>
+					<Glyph seed={project.name} size={26} class="shrink-0" />
 					{project.name}
 				</h3>
 				<span class="machine inline-flex shrink-0 items-center gap-1.5 text-xs text-dim">

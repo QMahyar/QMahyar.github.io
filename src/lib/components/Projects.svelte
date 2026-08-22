@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { reveal } from '$lib/actions/reveal';
+	import { spotlight } from '$lib/actions/spotlight';
 	import SectionHeading from './SectionHeading.svelte';
 	import ProjectCard from './ProjectCard.svelte';
 	import { flagships, projects, moreProjects, profile } from '$lib/data/site';
@@ -18,7 +20,7 @@
 				<article
 					class="grid min-w-0 items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20"
 				>
-				<div class="min-w-0 {flip ? 'md:order-2' : ''}">
+					<div class="min-w-0 {flip ? 'md:order-2' : ''}" use:reveal={{ delay: flip ? 90 : 0 }}>
 						<p class="machine text-xs tracking-[0.08em] text-dim uppercase">
 							flagship &middot; rust &middot; {project.updated}
 						</p>
@@ -40,12 +42,16 @@
 								rel="noopener noreferrer"
 								class="link-arrow machine text-sm"
 							>
-								view repo <span aria-hidden="true">&nearr;</span>
+								view repo <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 							</a>
 						</p>
 					</div>
 
-				<div class="surface min-w-0 p-6 md:p-8 {flip ? 'md:order-1' : ''}">
+					<div
+						class="surface spot min-w-0 p-6 md:p-8 {flip ? 'md:order-1' : ''}"
+						use:reveal={{ delay: flip ? 0 : 90 }}
+						use:spotlight
+					>
 						<p class="term-label">{project.name} &middot; spec</p>
 						<dl class="divide-y divide-line/60">
 							{#each project.spec as row (row.key)}
@@ -63,18 +69,18 @@
 		<!-- Ledger — the smaller repos as an index -->
 		<div class="mt-28 md:mt-36">
 			<div class="grid gap-x-10 gap-y-5 sm:grid-cols-2">
-				{#each projects as project (project.name)}
-					<ProjectCard {project} />
+				{#each projects as project, i (project.name)}
+					<ProjectCard {project} delay={i * 70} />
 				{/each}
 			</div>
 
 			<ul class="mt-20 divide-y divide-line/50 border-t border-line/50">
-				{#each moreProjects as project (project.name)}
-					<ProjectCard {project} compact />
+				{#each moreProjects as project, i (project.name)}
+					<ProjectCard {project} compact delay={i * 45} />
 				{/each}
 			</ul>
 
-			<p class="mt-10 machine text-sm text-dim">
+			<p class="mt-10 machine text-sm text-dim" use:reveal>
 				&rarr; everything else:
 				<a
 					href={profile.github}

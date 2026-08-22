@@ -8,6 +8,25 @@
 
 		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+		/** Resolve a CSS color token to an rgb() triple so canvas strokes stay token-driven. */
+		function tokenRgb(name: string): [number, number, number] {
+			const probe = document.createElement('canvas');
+			probe.width = 1;
+			probe.height = 1;
+			const pctx = probe.getContext('2d');
+			if (!pctx) return [255, 255, 255];
+			pctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+			pctx.fillRect(0, 0, 1, 1);
+			const d = pctx.getImageData(0, 0, 1, 1).data;
+			return [d[0], d[1], d[2]];
+		}
+
+		const BEAM = tokenRgb('--color-beam');
+		const GLOW = tokenRgb('--color-glow');
+		const FOG = tokenRgb('--color-fog');
+		const rgba = ([r, g, b]: [number, number, number], a: number) =>
+			`rgba(${r}, ${g}, ${b}, ${a.toFixed(3)})`;
+
 		interface Node {
 			x: number;
 			y: number;
@@ -87,7 +106,7 @@
 				const nb = nodes[b];
 				const dist = Math.hypot(na.x - nb.x, na.y - nb.y);
 				const alpha = (1 - dist / LINK_DIST) * (staticFrame ? 0.4 : 0.32);
-				g.strokeStyle = `rgba(47, 168, 238, ${alpha.toFixed(3)})`;
+				g.strokeStyle = rgba(BEAM, alpha);
 				g.lineWidth = 1;
 				g.beginPath();
 				g.moveTo(na.x, na.y);
@@ -103,7 +122,7 @@
 				const dist = Math.hypot(dx, dy);
 				if (dist < 170) {
 					const alpha = (1 - dist / 170) * 0.45;
-					g.strokeStyle = `rgba(121, 234, 234, ${alpha.toFixed(3)})`;
+					g.strokeStyle = rgba(GLOW, alpha);
 					g.lineWidth = 1;
 					g.beginPath();
 					g.moveTo(n.x, n.y);
@@ -115,7 +134,7 @@
 
 		function drawNodes() {
 			for (const n of nodes) {
-				g.fillStyle = n.cyan ? 'rgba(121, 234, 234, 0.9)' : 'rgba(232, 232, 232, 0.55)';
+				g.fillStyle = rgba(n.cyan ? GLOW : FOG, n.cyan ? 0.9 : 0.55);
 				g.beginPath();
 				g.arc(n.x, n.y, n.r + (n.cyan ? 0.6 : 0), 0, Math.PI * 2);
 				g.fill();
@@ -130,7 +149,7 @@
 				const nb = nodes[p.b];
 				const x = na.x + (nb.x - na.x) * p.t;
 				const y = na.y + (nb.y - na.y) * p.t;
-				g.fillStyle = 'rgba(121, 234, 234, 0.95)';
+				g.fillStyle = rgba(GLOW, 0.95);
 				g.beginPath();
 				g.arc(x, y, 1.8, 0, Math.PI * 2);
 				g.fill();
@@ -211,7 +230,8 @@
 
 		window.addEventListener('resize', onResize);
 		window.addEventListener('pointermove', onMove, { passive: true });
-		window.addEventListener('pointerleave', onLeave);
+		document.documentElement.addEventListener('mouseleave', onLeave);
+		window.addEventListener('blur', onLeave);
 		document.addEventListener('visibilitychange', onVisibility);
 
 		const io = new IntersectionObserver(([entry]) => {
@@ -226,7 +246,8 @@
 			io.disconnect();
 			window.removeEventListener('resize', onResize);
 			window.removeEventListener('pointermove', onMove);
-			window.removeEventListener('pointerleave', onLeave);
+			document.documentElement.removeEventListener('mouseleave', onLeave);
+			window.removeEventListener('blur', onLeave);
 			document.removeEventListener('visibilitychange', onVisibility);
 		};
 	});

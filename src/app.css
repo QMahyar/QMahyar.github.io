@@ -3,7 +3,9 @@
 /* Hallmark · genre: atmospheric · macrostructure: Split Studio · theme: Midnight (Campbell-Vivid tuned)
  * enrichment: kept hand-built NetworkCanvas + typographic-frame terminal specs
  * nav: N9 edge-aligned minimal · footer: Ft5 statement · heads: S2 hanging / S4 inline
- * motion: load-stagger fade · caret blink (typed line) · canvas ambient — 3 primitives
+ * motion: typewriter status line · enter stagger · scroll-reveal cascade (reveal.ts) ·
+ *   word-reveal statement · caret blink · spotlight spec panels · progress hairline ·
+ *   count-up stats · arrow nudge — all transform/opacity, all dead under reduced-motion
  * contrast: pass (40–41) · slop: pass (42–49) · verified 320/375/414/768/1280
  */
 
@@ -38,6 +40,8 @@
 	html {
 		scroll-behavior: smooth;
 		overflow-x: clip;
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-line) var(--color-void);
 	}
 
 	body {
@@ -179,6 +183,40 @@
 	.link-arrow:active {
 		transform: translateY(1px);
 	}
+	.link-arrow .arr {
+		display: inline-block;
+		transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.link-arrow:hover .arr-ne {
+		transform: translate(2px, -2px);
+	}
+	.link-arrow:hover .arr-d {
+		transform: translateY(3px);
+	}
+
+	/* Cursor spotlight — desktop hover only; --mx/--my set from pointermove */
+	.spot {
+		position: relative;
+	}
+	@media (hover: hover) and (pointer: fine) {
+		.spot::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			border-radius: inherit;
+			pointer-events: none;
+			opacity: 0;
+			background: radial-gradient(
+				17rem circle at var(--mx, 50%) var(--my, 50%),
+				oklch(85% 0.115 195 / 0.07),
+				transparent 70%
+			);
+			transition: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
+		}
+		.spot:hover::after {
+			opacity: 1;
+		}
+	}
 }
 
 /* ── Page-load orchestration — hero only, one entrance, cap ~500ms ── */
@@ -209,6 +247,54 @@
 	}
 }
 
+/* ── Scroll reveal — wired via the reveal action (IO, once, staggered by delay) ── */
+.reveal {
+	opacity: 0;
+	transform: translateY(16px);
+	transition:
+		opacity 520ms cubic-bezier(0.16, 1, 0.3, 1),
+		transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: opacity, transform;
+}
+.reveal.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* Word mode — statement splits into .rw spans, staggered via --wd index */
+.reveal[data-words] {
+	opacity: 1;
+	transform: none;
+	transition: none;
+	will-change: auto;
+}
+.rw {
+	display: inline-block;
+	opacity: 0;
+	transform: translateY(0.45em);
+	transition:
+		opacity 480ms cubic-bezier(0.16, 1, 0.3, 1),
+		transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+	transition-delay: calc(var(--wd, 0) * 55ms);
+}
+.is-visible .rw,
+.no-io .rw {
+	opacity: 1;
+	transform: none;
+}
+
+/* ── Scroll progress hairline under the nav ── */
+.progress {
+	position: absolute;
+	inset-inline: 0;
+	bottom: 0;
+	height: 2px;
+	background: var(--color-glow);
+	opacity: 0.55;
+	transform-origin: 0 50%;
+	transform: scaleX(var(--p, 0));
+}
+
 @media (prefers-reduced-motion: reduce) {
 	html {
 		scroll-behavior: auto;
@@ -226,5 +312,11 @@
 	}
 	.caret {
 		animation: none;
+	}
+	.reveal,
+	.rw {
+		transition: none;
+		transform: none;
+		opacity: 1;
 	}
 }

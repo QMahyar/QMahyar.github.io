@@ -2,6 +2,7 @@
 	import Nav from '$lib/components/Nav.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import Projects from '$lib/components/Projects.svelte';
+	import StatsStrip from '$lib/components/StatsStrip.svelte';
 	import Stack from '$lib/components/Stack.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 </script>
@@ -18,6 +19,7 @@
 	<main>
 		<Hero />
 		<Projects />
+		<StatsStrip />
 		<Stack />
 	</main>
 	<Contact />

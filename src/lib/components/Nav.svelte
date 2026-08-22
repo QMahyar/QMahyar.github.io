@@ -2,9 +2,17 @@
 	import { profile } from '$lib/data/site';
 
 	let scrolled = $state(false);
+	let progress = $state(0);
+
+	function onScroll() {
+		scrolled = window.scrollY > 24;
+		const doc = document.documentElement;
+		const max = doc.scrollHeight - window.innerHeight;
+		progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+	}
 </script>
 
-<svelte:window onscroll={() => (scrolled = window.scrollY > 24)} />
+<svelte:window onscroll={onScroll} />
 
 <!-- N9 · edge-aligned minimal — wordmark hard-left, one CTA hard-right, the space is the design -->
 <header
@@ -22,7 +30,10 @@
 			rel="noopener noreferrer"
 			class="link-arrow machine text-sm min-h-11 items-center"
 		>
-			say hello <span aria-hidden="true">&nearr;</span>
+			say hello <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 		</a>
 	</nav>
+
+	<!-- scroll progress hairline -->
+	<div class="progress" style="--p: {progress}" aria-hidden="true"></div>
 </header>
