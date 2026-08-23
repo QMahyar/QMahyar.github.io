@@ -47,7 +47,6 @@
 			use:reveal
 		>
 			<p>&copy; 2026 Mahyar</p>
-			<p>svelte 5 &middot; tailwind v4 &middot; github pages</p>
 			<a href="#top" class="transition-colors duration-150 hover:text-glow">back to top &uarr;</a>
 		</div>
 	</div>
