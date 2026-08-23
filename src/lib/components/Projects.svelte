@@ -1,18 +1,12 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
 	import { spotlight } from '$lib/actions/spotlight';
-	import SectionHeading from './SectionHeading.svelte';
 	import ProjectCard from './ProjectCard.svelte';
 	import { flagships, projects, moreProjects, profile } from '$lib/data/site';
 </script>
 
 <section id="projects" class="relative scroll-mt-20 py-28 md:py-36">
 	<div class="mx-auto max-w-6xl px-6">
-		<SectionHeading
-			title="Built in the open."
-			blurb="Two flagships carry the flag — both Rust, both alive. The full catalogue lives on GitHub."
-		/>
-
 		<!-- Split Studio diptychs — text and proof alternate direction -->
 		<div class="flex flex-col gap-24 md:gap-32">
 			{#each flagships as project, i (project.name)}

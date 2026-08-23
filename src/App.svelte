@@ -5,6 +5,7 @@
 	import StatsStrip from '$lib/components/StatsStrip.svelte';
 	import Stack from '$lib/components/Stack.svelte';
 	import Contact from '$lib/components/Contact.svelte';
+	import NetworkCanvas from '$lib/components/NetworkCanvas.svelte';
 </script>
 
 <a
@@ -15,6 +16,13 @@
 </a>
 
 <div class="grain atmosphere relative">
+	<!-- Full-page network field — fixed behind every section, alive on scroll -->
+	<div
+		class="pointer-events-none fixed inset-0 -z-[1] opacity-60 sm:opacity-80"
+		aria-hidden="true"
+	>
+		<NetworkCanvas />
+	</div>
 	<Nav />
 	<main>
 		<Hero />
