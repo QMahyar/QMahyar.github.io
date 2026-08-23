@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://qmahyar.github.io/sitemap.xml

@@ -63,7 +63,7 @@
 			canvas.height = Math.round(height * dpr);
 			g.setTransform(dpr, 0, 0, dpr, 0, 0);
 			seed();
-			if (reduced) drawFrame(true);
+			if (reduced) drawFrame(collectPairs(), true);
 		}
 
 		function seed() {
@@ -118,6 +118,7 @@
 		}
 
 		function mouseLinks() {
+			if (mouse.x === -9999) return;
 			for (const n of nodes) {
 				const dx = n.x - mouse.x;
 				const dy = n.y - mouse.y;
@@ -170,9 +171,8 @@
 			}
 		}
 
-		function drawFrame(staticFrame = false) {
+		function drawFrame(pairs: [number, number][], staticFrame = false) {
 			g.clearRect(0, 0, width, height);
-			const pairs = collectPairs();
 			drawLinks(pairs, staticFrame);
 			mouseLinks();
 			drawNodes();
@@ -180,13 +180,20 @@
 		}
 
 		let lastSpawn = 0;
+		let lastFrame = 0;
 		function loop(time: number) {
 			if (!running) return;
+			if (time - lastFrame < 32) {
+				raf = requestAnimationFrame(loop);
+				return;
+			}
+			lastFrame = time;
 			step();
-			drawFrame(false);
+			const pairs = collectPairs();
+			drawFrame(pairs, false);
 			if (time - lastSpawn > 650) {
 				lastSpawn = time;
-				spawnPacket(collectPairs());
+				spawnPacket(pairs);
 			}
 			raf = requestAnimationFrame(loop);
 		}
@@ -205,7 +212,7 @@
 		resize();
 
 		if (reduced) {
-			drawFrame(true);
+			drawFrame(collectPairs(), true);
 			return () => {};
 		}
 
@@ -230,8 +237,9 @@
 			}
 		};
 
+		const coarse = window.matchMedia('(pointer: coarse)').matches;
 		window.addEventListener('resize', onResize);
-		window.addEventListener('pointermove', onMove, { passive: true });
+		if (!coarse) window.addEventListener('pointermove', onMove, { passive: true });
 		document.documentElement.addEventListener('mouseleave', onLeave);
 		window.addEventListener('blur', onLeave);
 		document.addEventListener('visibilitychange', onVisibility);
@@ -247,7 +255,7 @@
 			stop();
 			io.disconnect();
 			window.removeEventListener('resize', onResize);
-			window.removeEventListener('pointermove', onMove);
+			if (!coarse) window.removeEventListener('pointermove', onMove);
 			document.documentElement.removeEventListener('mouseleave', onLeave);
 			window.removeEventListener('blur', onLeave);
 			document.removeEventListener('visibilitychange', onVisibility);

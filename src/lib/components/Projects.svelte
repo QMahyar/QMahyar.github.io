@@ -2,7 +2,23 @@
 	import { reveal } from '$lib/actions/reveal';
 	import { spotlight } from '$lib/actions/spotlight';
 	import ProjectCard from './ProjectCard.svelte';
-	import { flagships, projects, moreProjects, profile } from '$lib/data/site';
+	import {
+		flagships as fallbackFlagships,
+		projects as fallbackProjects,
+		moreProjects as fallbackMore,
+		profile
+	} from '$lib/data/site';
+	import type { Flagship, Project } from '$lib/data/site';
+
+	let {
+		flagships = fallbackFlagships as Flagship[],
+		projects = fallbackProjects as Project[],
+		moreProjects = fallbackMore as Project[]
+	}: {
+		flagships?: Flagship[];
+		projects?: Project[];
+		moreProjects?: Project[];
+	} = $props();
 </script>
 
 <section id="projects" class="relative scroll-mt-20 py-28 md:py-36">

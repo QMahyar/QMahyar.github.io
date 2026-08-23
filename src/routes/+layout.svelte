@@ -1,11 +1,18 @@
 <script lang="ts">
+	import '@fontsource/space-grotesk/400.css';
+	import '@fontsource/space-grotesk/500.css';
+	import '@fontsource/space-grotesk/600.css';
+	import '@fontsource/space-grotesk/700.css';
+	import '@fontsource/jetbrains-mono/400.css';
+	import '@fontsource/jetbrains-mono/500.css';
+	import '@fontsource/jetbrains-mono/600.css';
+	import '../app.css';
+
 	import Nav from '$lib/components/Nav.svelte';
-	import Hero from '$lib/components/Hero.svelte';
-	import Projects from '$lib/components/Projects.svelte';
-	import StatsStrip from '$lib/components/StatsStrip.svelte';
-	import Stack from '$lib/components/Stack.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import NetworkCanvas from '$lib/components/NetworkCanvas.svelte';
+
+	let { children } = $props();
 </script>
 
 <a
@@ -16,7 +23,6 @@
 </a>
 
 <div class="grain atmosphere relative">
-	<!-- Full-page network field — fixed behind every section, alive on scroll -->
 	<div
 		class="pointer-events-none fixed inset-0 -z-[1] opacity-60 sm:opacity-80"
 		aria-hidden="true"
@@ -25,10 +31,7 @@
 	</div>
 	<Nav />
 	<main>
-		<Hero />
-		<Projects />
-		<StatsStrip />
-		<Stack />
+		{@render children()}
 	</main>
 	<Contact />
 </div>

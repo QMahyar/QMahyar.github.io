@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
-	import { stats } from '$lib/data/site';
+	import { stats as fallbackStats } from '$lib/data/site';
+	import { browser } from '$app/environment';
+
+	let { stats = fallbackStats }: { stats?: Array<{ value: string; label: string }> | typeof fallbackStats } = $props();
 
 	let section: HTMLElement;
 	let progresses = $state([0, 0, 0]);
@@ -35,6 +38,7 @@
 	});
 
 	function display(value: string, idx: number): string {
+		if (!browser) return value;
 		const p = progresses[idx];
 		if (p >= 1 || !/^\d{1,2}$/.test(value)) return value;
 		return String(Math.round(Number(value) * p));
