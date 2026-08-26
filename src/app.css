@@ -38,6 +38,7 @@
 
 @layer base {
 	html {
+		color-scheme: dark;
 		scroll-behavior: smooth;
 		overflow-x: clip;
 		scrollbar-width: thin;

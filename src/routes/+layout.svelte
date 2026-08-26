@@ -16,7 +16,7 @@
 </script>
 
 <a
-	href="#projects"
+	href="#main"
 	class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-glow focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-void"
 >
 	Skip to content
@@ -30,7 +30,7 @@
 		<NetworkCanvas />
 	</div>
 	<Nav />
-	<main>
+	<main id="main" tabindex="-1">
 		{@render children()}
 	</main>
 	<Contact />

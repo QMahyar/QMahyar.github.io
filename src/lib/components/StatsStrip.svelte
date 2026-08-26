@@ -55,12 +55,12 @@
 					use:reveal={{ delay: i * 90 }}
 					data-variant="stack"
 				>
-					<dd class="order-1 machine text-[2rem] font-semibold tracking-tight text-fog tabular-nums md:text-[2.44rem]">
-						{display(stat.value, i)}
-					</dd>
 					<dt class="order-2 mt-2 machine text-xs tracking-wider text-dim uppercase">
 						{stat.label}
 					</dt>
+					<dd class="order-1 machine text-[2rem] font-semibold tracking-tight text-fog tabular-nums md:text-[2.44rem]">
+						{display(stat.value, i)}
+					</dd>
 				</div>
 			{/each}
 		</dl>

@@ -23,6 +23,7 @@
 
 <section id="projects" class="relative scroll-mt-20 py-28 md:py-36">
 	<div class="mx-auto max-w-6xl px-6">
+		<h2 class="sr-only">Projects</h2>
 		<!-- Split Studio diptychs — text and proof alternate direction -->
 		<div class="flex flex-col gap-24 md:gap-32">
 			{#each flagships as project, i (project.name)}
@@ -79,11 +80,11 @@
 
 		<!-- Ledger — the smaller repos as an index -->
 		<div class="mt-28 md:mt-36">
-			<div class="grid gap-x-10 gap-y-5 sm:grid-cols-2">
+			<ul class="grid gap-x-10 gap-y-5 sm:grid-cols-2">
 				{#each projects as project, i (project.name)}
 					<ProjectCard {project} delay={i * 45} />
 				{/each}
-			</div>
+			</ul>
 
 			<ul class="mt-20 divide-y divide-line/50 border-t border-line/50">
 				{#each moreProjects as project, i (project.name)}

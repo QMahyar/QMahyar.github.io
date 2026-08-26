@@ -7,6 +7,7 @@
 <section id="stack" class="relative scroll-mt-20 border-t border-line/50 py-28 md:py-36">
 	<div class="mx-auto max-w-6xl px-6">
 		<!-- S4 · inline no-break — the head emerges inside the flow, no spatial break -->
+		<h2 class="sr-only">Stack</h2>
 		<p class="mb-10 machine text-sm text-dim" use:reveal>
 			The stack<span aria-hidden="true">.</span>
 			<span class="mx-3 text-line" aria-hidden="true">/</span>

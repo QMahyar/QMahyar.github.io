@@ -25,6 +25,7 @@
 	<meta property="og:image" content="https://qmahyar.github.io/og.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Mahyar — developer and security enthusiast, with a cyan network motif." />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Mahyar — Developer & Security Enthusiast" />
 	<meta
@@ -32,6 +33,7 @@
 		content="Tools for Telegram, networking, and developer workflows."
 	/>
 	<meta name="twitter:image" content="https://qmahyar.github.io/og.png" />
+	<meta name="twitter:image:alt" content="Mahyar — developer and security enthusiast, with a cyan network motif." />
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'Person',
