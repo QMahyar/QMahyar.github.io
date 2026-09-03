@@ -23,12 +23,14 @@ export interface Project {
 /** Proof-column rows for the flagship diptychs. Every value comes from the project's own description. */
 export interface Flagship extends Project {
 	spec: Array<{ key: string; value: string }>;
+	slug?: string;
 }
 
 /** The two main projects — everything else orbits these. Both pure Rust. */
 export const flagships: Flagship[] = [
 	{
 		name: 'tele-cli',
+		slug: 'tele-cli',
 		url: 'https://github.com/QMahyar/tele-cli',
 		description:
 			'Drive real Telegram user accounts from the terminal — messages, chats, groups, contacts, live streaming. Name your accounts, fan commands out across all of them, get tables for humans or JSON for machines. Pure Rust on grammers, zero C dependencies.',
@@ -45,6 +47,7 @@ export const flagships: Flagship[] = [
 	},
 	{
 		name: 'cf-scanner',
+		slug: 'cf-scanner',
 		url: 'https://github.com/QMahyar/cf-scanner',
 		description:
 			'One cross-platform Rust binary that finds working Cloudflare endpoints on ISP-restricted networks — TLS scans across official ranges, WARP discovery through real WireGuard handshakes, driven by CLI, wizard, or browser UI.',

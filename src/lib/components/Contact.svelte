@@ -42,8 +42,19 @@
 			{/each}
 		</ul>
 
+		<nav
+			aria-label="Sitemap"
+			class="machine mt-14 flex flex-wrap gap-x-6 gap-y-2 text-xs text-dim"
+			use:reveal
+		>
+			<a href="/" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-glow">home</a>
+			<a href="/projects" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-glow">projects</a>
+			<a href="/projects/tele-cli" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-glow">tele-cli</a>
+			<a href="/projects/cf-scanner" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-glow">cf-scanner</a>
+		</nav>
+
 		<div
-			class="mt-14 flex flex-col justify-between gap-3 border-t border-line/50 pt-6 machine text-xs text-dim sm:flex-row"
+			class="mt-6 flex flex-col justify-between gap-3 border-t border-line/50 pt-6 machine text-xs text-dim sm:flex-row"
 			use:reveal
 		>
 			<p>&copy; {new Date().getFullYear()} Mahyar</p>

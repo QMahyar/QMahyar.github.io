@@ -54,17 +54,31 @@
 							flagship &middot; rust &middot; {project.updated}
 						</p>
 						<h3 class="mt-3 text-3xl tracking-tight md:text-4xl">
-							<a
-								href={project.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="transition-colors duration-150 hover:text-glow"
-							>
-								{project.name}
-							</a>
+							{#if project.slug}
+								<a
+									href="/projects/{project.slug}"
+									class="transition-colors duration-150 hover:text-glow"
+								>
+									{project.name}
+								</a>
+							{:else}
+								<a
+									href={project.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="transition-colors duration-150 hover:text-glow"
+								>
+									{project.name}
+								</a>
+							{/if}
 						</h3>
 						<p class="mt-5 max-w-md leading-relaxed">{project.description}</p>
-						<p class="mt-7">
+						<div class="mt-7 flex flex-wrap gap-x-8 gap-y-3">
+							{#if project.slug}
+								<a href="/projects/{project.slug}" class="link-arrow machine text-sm">
+									deep-dive <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
+								</a>
+							{/if}
 							<a
 								href={project.url}
 								target="_blank"
@@ -73,7 +87,7 @@
 							>
 								view repo <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 							</a>
-						</p>
+						</div>
 					</div>
 
 					<div

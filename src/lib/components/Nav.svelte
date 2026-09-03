@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { profile } from '$lib/data/site';
+
+	const onProjects = $derived(page.url.pathname.startsWith('/projects'));
 
 let scrolled = $state(false);
 let progress = $state(0);
@@ -25,18 +28,18 @@ $effect(() => {
 		: 'border-transparent'}"
 >
 	<nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6" aria-label="Main">
-		<a href="#top" class="machine shrink-0 text-lg font-semibold tracking-tight text-fog">
+		<a href="/" class="machine shrink-0 text-lg font-semibold tracking-tight text-fog">
 			Q<span class="text-glow">_</span>
 		</a>
 		<ul class="flex items-center gap-2.5 sm:gap-4 md:gap-6" aria-label="Sections">
 			<li>
-				<a href="#projects" class="inline-flex min-h-11 items-center machine text-xs tracking-wide text-dim transition-colors duration-150 hover:text-fog sm:text-sm">projects</a>
+				<a href="/projects" aria-current={onProjects ? 'page' : undefined} class="inline-flex min-h-11 items-center machine text-xs tracking-wide transition-colors duration-150 hover:text-fog sm:text-sm {onProjects ? 'text-fog' : 'text-dim'}">projects</a>
 			</li>
 			<li>
-				<a href="#stack" class="inline-flex min-h-11 items-center machine text-xs tracking-wide text-dim transition-colors duration-150 hover:text-fog sm:text-sm">stack</a>
+				<a href="/#stack" class="inline-flex min-h-11 items-center machine text-xs tracking-wide text-dim transition-colors duration-150 hover:text-fog sm:text-sm">stack</a>
 			</li>
 			<li>
-				<a href="#contact" class="inline-flex min-h-11 items-center machine text-xs tracking-wide text-dim transition-colors duration-150 hover:text-fog sm:text-sm">contact</a>
+				<a href="/#contact" class="inline-flex min-h-11 items-center machine text-xs tracking-wide text-dim transition-colors duration-150 hover:text-fog sm:text-sm">contact</a>
 			</li>
 		</ul>
 		<a
