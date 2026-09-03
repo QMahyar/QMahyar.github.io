@@ -70,10 +70,10 @@
 					<Glyph seed={project.name} size={32} class="shrink-0" />
 					{project.name}
 				</h3>
-				<span class="machine inline-flex shrink-0 items-center gap-1.5 text-xs text-dim">
+				<span class="machine inline-flex shrink-0 items-center gap-1.5 text-xs text-dim" aria-label={typeof project.stars === 'number' ? `${project.stars} stars` : undefined}>
 					{#if typeof project.stars === 'number'}
 						<Star size={12} aria-hidden="true" />
-						{project.stars}
+						<span aria-hidden="true">{project.stars}</span>
 					{/if}
 				</span>
 			</div>

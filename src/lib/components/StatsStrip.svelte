@@ -6,47 +6,61 @@
 	let { stats = fallbackStats }: { stats?: Array<{ value: string; label: string }> | typeof fallbackStats } = $props();
 
 	let section: HTMLElement;
-	let progresses = $state([0, 0, 0]);
+	let progresses = $state<number[]>([]);
+
+	// Reset the count-up progress whenever the stat list changes (live data
+	// arrives after prerender with the same length but different values).
+	$effect(() => {
+		progresses = stats.map(() => 0);
+	});
 
 	$effect(() => {
+		const count = stats.length;
+		const timers: Array<ReturnType<typeof setTimeout>> = [];
 		const io = new IntersectionObserver(
 			([entry]) => {
 				if (!entry.isIntersecting) return;
 				io.disconnect();
 				if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-					progresses = [1, 1, 1];
+					progresses = stats.map(() => 1);
 					return;
 				}
 				const duration = 1600;
-				for (let idx = 0; idx < 3; idx++) {
+				for (let idx = 0; idx < count; idx++) {
 					const startDelay = idx * 140;
-					setTimeout(() => {
-						const t0 = performance.now();
-						const tick = (now: number) => {
-							const p = Math.min(1, (now - t0) / duration);
-							progresses[idx] = 1 - Math.pow(1 - p, 3);
-							if (p < 1) requestAnimationFrame(tick);
-						};
-						requestAnimationFrame(tick);
-					}, startDelay);
+					timers.push(
+						setTimeout(() => {
+							const t0 = performance.now();
+							const tick = (now: number) => {
+								const p = Math.min(1, (now - t0) / duration);
+								progresses[idx] = 1 - Math.pow(1 - p, 3);
+								if (p < 1) requestAnimationFrame(tick);
+							};
+							requestAnimationFrame(tick);
+						}, startDelay)
+					);
 				}
 			},
 			{ threshold: 0.4 }
 		);
 		io.observe(section);
-		return () => io.disconnect();
+		return () => {
+			io.disconnect();
+			for (const t of timers) clearTimeout(t);
+		};
 	});
 
 	function display(value: string, idx: number): string {
 		if (!browser) return value;
-		const p = progresses[idx];
+		const p = progresses[idx] ?? 1;
 		if (p >= 1 || !/^\d{1,2}$/.test(value)) return value;
 		return String(Math.round(Number(value) * p));
 	}
 </script>
 
 <!-- Stat strip — proof column between the ledger and the stack -->
-<section bind:this={section} class="relative border-t border-line/50 py-20 md:py-24">
+<section bind:this={section} aria-label="GitHub stats" class="relative border-t border-line/50 py-20 md:py-24">
+	<h2 class="sr-only">GitHub stats</h2>
 	<div class="mx-auto max-w-6xl px-6">
 		<dl class="grid gap-x-6 gap-y-10 sm:grid-cols-3 sm:divide-x sm:divide-line/50">
 			{#each stats as stat, i (stat.label)}
@@ -58,7 +72,7 @@
 					<dt class="order-2 mt-2 machine text-xs tracking-wider text-dim uppercase">
 						{stat.label}
 					</dt>
-					<dd class="order-1 machine text-[2rem] font-semibold tracking-tight text-fog tabular-nums md:text-[2.44rem]">
+					<dd class="order-1 machine min-h-[1.2em] text-[2rem] font-semibold tracking-tight {i === 2 ? 'text-warm' : 'text-fog'} tabular-nums md:text-[2.44rem]">
 						{display(stat.value, i)}
 					</dd>
 				</div>

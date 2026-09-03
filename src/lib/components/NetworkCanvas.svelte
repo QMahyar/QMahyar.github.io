@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { heroPeriodCenter, flashHeroPeriod } from '$lib/stores/hero-pulse';
+
 	let canvas: HTMLCanvasElement;
 
 	$effect(() => {
@@ -8,14 +10,17 @@
 
 		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		/** Resolve a CSS color token to an rgb() triple so canvas strokes stay token-driven. */
+		/** Resolve CSS color tokens to rgb() triples so canvas strokes stay token-driven.
+		 *  One shared 1x1 probe canvas + one getComputedStyle call for all tokens. */
+		const probe = document.createElement('canvas');
+		probe.width = 1;
+		probe.height = 1;
+		const pctx = probe.getContext('2d', { willReadFrequently: true });
+		const rootStyle = getComputedStyle(document.documentElement);
 		function tokenRgb(name: string): [number, number, number] {
-			const probe = document.createElement('canvas');
-			probe.width = 1;
-			probe.height = 1;
-			const pctx = probe.getContext('2d');
 			if (!pctx) return [255, 255, 255];
-			pctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+			pctx.clearRect(0, 0, 1, 1);
+			pctx.fillStyle = rootStyle.getPropertyValue(name).trim();
 			pctx.fillRect(0, 0, 1, 1);
 			const d = pctx.getImageData(0, 0, 1, 1).data;
 			return [d[0], d[1], d[2]];
@@ -84,29 +89,63 @@
 			}
 		}
 
-		function spawnPacket(pairs: [number, number][]) {
+		function spawnPacket(pairs: Array<[number, number, number]>) {
 			if (pairs.length === 0 || packets.length >= 14) return;
 			const [a, b] = pairs[Math.floor(Math.random() * pairs.length)];
 			packets.push({ a, b, t: 0, speed: 0.008 + Math.random() * 0.01 });
 		}
 
-		function collectPairs(): [number, number][] {
-			const pairs: [number, number][] = [];
+		interface HeroPacket {
+			from: number; sx: number; sy: number; tx: number; ty: number; t: number; speed: number;
+		}
+		const heroPackets: HeroPacket[] = [];
+
+		function lerp(a: number, b: number, t: number): number { return a + (b - a) * t; }
+
+		function spawnHeroPacket() {
+			if (reduced) return;
+			const hero = heroPeriodCenter();
+			if (!hero || nodes.length === 0 || heroPackets.length >= 3) return;
+			const rect = canvas.getBoundingClientRect();
+			const hx = hero.x - rect.left;
+			const hy = hero.y - rect.top;
+			if (hx < -50 || hy < -50 || hx > width + 50 || hy > height + 50) return;
+			let nearest = 0;
+			let minDist = Infinity;
+			for (let i = 0; i < nodes.length; i++) {
+				const d = Math.hypot(nodes[i].x - hx, nodes[i].y - hy);
+				if (d < minDist) { minDist = d; nearest = i; }
+			}
+			if (minDist > LINK_DIST * 3) return;
+			heroPackets.push({
+				from: nearest,
+				sx: nodes[nearest].x,
+				sy: nodes[nearest].y,
+				tx: hx, ty: hy, t: 0,
+				speed: 0.02 + Math.random() * 0.012
+			});
+		}
+
+		/** Pairs carry their squared distance so drawLinks avoids a second hypot pass. */
+		function collectPairs(): Array<[number, number, number]> {
+			const pairs: Array<[number, number, number]> = [];
+			const max2 = LINK_DIST * LINK_DIST;
 			for (let i = 0; i < nodes.length; i++) {
 				for (let j = i + 1; j < nodes.length; j++) {
 					const dx = nodes[i].x - nodes[j].x;
 					const dy = nodes[i].y - nodes[j].y;
-					if (dx * dx + dy * dy < LINK_DIST * LINK_DIST) pairs.push([i, j]);
+					const d2 = dx * dx + dy * dy;
+					if (d2 < max2) pairs.push([i, j, d2]);
 				}
 			}
 			return pairs;
 		}
 
-		function drawLinks(pairs: [number, number][], staticFrame: boolean) {
-			for (const [a, b] of pairs) {
+		function drawLinks(pairs: Array<[number, number, number]>, staticFrame: boolean) {
+			for (const [a, b, d2] of pairs) {
 				const na = nodes[a];
 				const nb = nodes[b];
-				const dist = Math.hypot(na.x - nb.x, na.y - nb.y);
+				const dist = Math.sqrt(d2);
 				const alpha = (1 - dist / LINK_DIST) * (staticFrame ? 0.28 : 0.22);
 				g.strokeStyle = rgba(BEAM, alpha);
 				g.lineWidth = 1;
@@ -158,6 +197,27 @@
 				g.fill();
 				if (p.t >= 1) packets.splice(i, 1);
 			}
+			for (let i = heroPackets.length - 1; i >= 0; i--) {
+				const p = heroPackets[i];
+				p.t += p.speed;
+				const cx = lerp(p.sx, p.tx, p.t);
+				const cy = lerp(p.sy, p.ty, p.t);
+				g.fillStyle = rgba(GLOW, 0.95);
+				g.beginPath();
+				g.arc(cx, cy, 2, 0, Math.PI * 2);
+				g.fill();
+				for (let j = 1; j <= 3; j++) {
+					const tt = Math.max(0, p.t - j * 0.06);
+					g.fillStyle = rgba(GLOW, 0.28 / j);
+					g.beginPath();
+					g.arc(lerp(p.sx, p.tx, tt), lerp(p.sy, p.ty, tt), 1.3, 0, Math.PI * 2);
+					g.fill();
+				}
+				if (p.t >= 1) {
+					flashHeroPeriod();
+					heroPackets.splice(i, 1);
+				}
+			}
 		}
 
 		function step() {
@@ -171,7 +231,7 @@
 			}
 		}
 
-		function drawFrame(pairs: [number, number][], staticFrame = false) {
+		function drawFrame(pairs: Array<[number, number, number]>, staticFrame = false) {
 			g.clearRect(0, 0, width, height);
 			drawLinks(pairs, staticFrame);
 			mouseLinks();
@@ -194,6 +254,7 @@
 			if (time - lastSpawn > 650) {
 				lastSpawn = time;
 				spawnPacket(pairs);
+				if (Math.random() < 0.3) spawnHeroPacket();
 			}
 			raf = requestAnimationFrame(loop);
 		}

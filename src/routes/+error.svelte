@@ -1,7 +1,3 @@
-<script lang="ts">
-	import { page } from '$app/stores';
-</script>
-
 <svelte:head>
 	<title>404 — Mahyar</title>
 	<meta name="robots" content="noindex" />
@@ -11,5 +7,8 @@
 	<p class="machine text-xs tracking-widest text-dim uppercase">404 · not found</p>
 	<h1 class="mt-4 text-4xl font-bold tracking-tight text-fog md:text-5xl">This page doesn't exist.</h1>
 	<p class="mt-4 max-w-md text-mist">The address you followed leads nowhere. Head back to the start and browse from there.</p>
-	<a href="/" class="link-arrow mt-8 machine text-sm">back to home <span class="arr arr-ne" aria-hidden="true">&nearr;</span></a>
+	<div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+		<a href="/" class="link-arrow machine text-sm">back to home <span class="arr arr-ne" aria-hidden="true">&nearr;</span></a>
+		<a href="/#projects" class="link-arrow machine text-sm">browse projects <span class="arr arr-d" aria-hidden="true">&darr;</span></a>
+	</div>
 </section>

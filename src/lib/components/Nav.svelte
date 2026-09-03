@@ -4,14 +4,16 @@
 let scrolled = $state(false);
 let progress = $state(0);
 
-$effect(onScroll);
-
 function onScroll() {
-		scrolled = window.scrollY > 24;
-		const doc = document.documentElement;
-		const max = doc.scrollHeight - window.innerHeight;
-		progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-	}
+	scrolled = window.scrollY > 24;
+	const doc = document.documentElement;
+	const max = doc.scrollHeight - window.innerHeight;
+	progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+}
+
+$effect(() => {
+	onScroll();
+});
 </script>
 
 <svelte:window onresize={onScroll} onscroll={onScroll} />
@@ -22,11 +24,11 @@ function onScroll() {
 		? 'border-transparent bg-void/85 backdrop-blur-md'
 		: 'border-transparent'}"
 >
-	<nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-6 sm:gap-6" aria-label="Main">
+	<nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6" aria-label="Main">
 		<a href="#top" class="machine shrink-0 text-lg font-semibold tracking-tight text-fog">
 			Q<span class="text-glow">_</span>
 		</a>
-		<ul class="flex items-center gap-3 sm:gap-4 md:gap-6" aria-label="Sections">
+		<ul class="flex items-center gap-2.5 sm:gap-4 md:gap-6" aria-label="Sections">
 			<li>
 				<a href="#projects" class="inline-flex min-h-11 items-center machine text-xs tracking-wide text-dim transition-colors duration-150 hover:text-fog sm:text-sm">projects</a>
 			</li>
@@ -43,10 +45,14 @@ function onScroll() {
 			rel="noopener noreferrer"
 			class="link-arrow machine shrink-0 text-xs min-h-11 items-center sm:text-sm"
 		>
-			say hello <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
+			<span class="max-[374px]:hidden">say hello</span><span class="hidden max-[374px]:inline">hi</span> <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 		</a>
 	</nav>
 
 	<!-- scroll progress hairline -->
 	<div class="progress" style="--p: {progress}" aria-hidden="true"></div>
+	<!-- Packet trail — comet head on the left edge, desktop only -->
+	<div class="packet-trail" style="--p: {progress}" aria-hidden="true">
+		<div class="packet-comet"></div>
+	</div>
 </header>

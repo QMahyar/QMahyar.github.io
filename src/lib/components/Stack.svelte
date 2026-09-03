@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
-	import SectionHeading from './SectionHeading.svelte';
 	import { stack } from '$lib/data/site';
 </script>
 
@@ -28,11 +27,20 @@
 						{/each}
 					</dl>
 					{#if i === 2}
-						<p class="mt-8 machine text-xs leading-relaxed text-dim">
-							editor: wezterm + powershell 7<br />
-							daily driver: windows<br />
-							deployed on: github pages
-						</p>
+						<dl class="mt-8 machine text-xs leading-relaxed text-dim">
+							<div class="flex gap-2">
+								<dt class="sr-only">Editor</dt>
+								<dd>editor: wezterm + powershell 7</dd>
+							</div>
+							<div class="flex gap-2">
+								<dt class="sr-only">Daily driver</dt>
+								<dd>daily driver: windows</dd>
+							</div>
+							<div class="flex gap-2">
+								<dt class="sr-only">Deployed on</dt>
+								<dd>deployed on: github pages</dd>
+							</div>
+						</dl>
 					{/if}
 				</div>
 			{/each}

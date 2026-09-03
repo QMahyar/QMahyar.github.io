@@ -1,8 +1,16 @@
 <script lang="ts">
 	import { profile } from '$lib/data/site';
+	import { heroPulse } from '$lib/stores/hero-pulse';
 
 	const command = 'mahyar --rust --telegram --network-tooling';
 	let typed = $state('');
+	let periodEl: HTMLElement;
+
+	$effect(() => {
+		if (!periodEl) return;
+		heroPulse.set(periodEl);
+		return () => heroPulse.set(null);
+	});
 
 	$effect(() => {
 		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -47,7 +55,11 @@
 				class="enter mt-6 text-[clamp(3.5rem,11vw,7rem)] font-bold leading-[0.95] text-fog"
 				style="--i: 1"
 			>
-				Mahyar.
+				Mahyar<span
+					bind:this={periodEl}
+					class="hero-period"
+					aria-hidden="true"
+				></span><span class="sr-only">.</span>
 			</h1>
 
 			<p
@@ -59,14 +71,14 @@
 			</p>
 
 			<div class="enter mt-10 flex flex-wrap items-center gap-x-8 gap-y-4" style="--i: 3">
-				<a href="#projects" class="link-arrow">
+				<a href="#projects" class="link-arrow inline-flex min-h-11 items-center">
 					Browse projects <span class="arr arr-d" aria-hidden="true">&darr;</span>
 				</a>
 				<a
 					href={profile.github}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="link-arrow"
+					class="link-arrow inline-flex min-h-11 items-center"
 				>
 					github.com/QMahyar <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 				</a>

@@ -3,9 +3,8 @@
 	import Projects from '$lib/components/Projects.svelte';
 	import StatsStrip from '$lib/components/StatsStrip.svelte';
 	import Stack from '$lib/components/Stack.svelte';
-	let { data } = $props() as unknown as {
-		data: { flagships: unknown[]; projects: unknown[]; moreProjects: unknown[]; stats: unknown[] };
-	};
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head>
@@ -42,10 +41,10 @@
 		sameAs: ['https://github.com/QMahyar', 'https://t.me/QMahyar', 'https://x.com/Mahyartdb'],
 		jobTitle: 'Developer & Security Enthusiast',
 		description: 'Builds tools for Telegram, networking, and developer workflows — Rust, TypeScript, Go.'
-	})}<\/script>`}
+	}).replace(/</g, '\\u003c')}<\/script>`}
 </svelte:head>
 
 <Hero />
-<Projects flagships={data.flagships as never} projects={data.projects as never} moreProjects={data.moreProjects as never} />
-<StatsStrip stats={data.stats as never} />
+<Projects flagships={data.flagships} projects={data.projects} moreProjects={data.moreProjects} />
+<StatsStrip stats={[...data.stats]} />
 <Stack />

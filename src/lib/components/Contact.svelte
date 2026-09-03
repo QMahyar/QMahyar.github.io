@@ -18,7 +18,7 @@
 			style="max-width: 24ch; overflow-wrap: anywhere; min-width: 0"
 			use:reveal={{ words: true }}
 		>
-			Everything worth keeping gets ported to Rust.
+			Everything worth keeping gets ported to <span class="text-warm">Rust</span>.
 		</p>
 
 		<ul class="mt-16 flex flex-wrap gap-x-8 gap-y-3">
@@ -46,8 +46,8 @@
 			class="mt-14 flex flex-col justify-between gap-3 border-t border-line/50 pt-6 machine text-xs text-dim sm:flex-row"
 			use:reveal
 		>
-			<p>&copy; 2026 Mahyar</p>
-			<a href="#top" class="transition-colors duration-150 hover:text-glow">back to top &uarr;</a>
+			<p>&copy; {new Date().getFullYear()} Mahyar</p>
+			<a href="#top" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-glow">back to top &uarr;</a>
 		</div>
 	</div>
 </footer>

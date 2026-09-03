@@ -4,10 +4,11 @@ interface RevealOptions {
 	words?: boolean;
 }
 
-/** Wrap every word of a text-only node in an inline-block span with a stagger index. */
+/** Wrap every word of the node in an inline-block span with a stagger index.
+ *  Recurses so <span class="text-warm">Rust</span> inside the statement splits too. */
 function splitWords(node: HTMLElement): HTMLElement[] {
 	const spans: HTMLElement[] = [];
-	const walk = (el: Node) => {
+	const walk = (el: Node): void => {
 		for (const child of [...el.childNodes]) {
 			if (child.nodeType === Node.TEXT_NODE && child.textContent?.trim()) {
 				const frag = document.createDocumentFragment();
@@ -25,6 +26,8 @@ function splitWords(node: HTMLElement): HTMLElement[] {
 					frag.appendChild(span);
 				}
 				child.replaceWith(frag);
+			} else if (child.nodeType === Node.ELEMENT_NODE) {
+				walk(child);
 			}
 		}
 	};
@@ -35,17 +38,17 @@ function splitWords(node: HTMLElement): HTMLElement[] {
 export function reveal(node: HTMLElement, options: RevealOptions = {}) {
 	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	if (reduced || !('IntersectionObserver' in window)) {
-		node.classList.add(reduced || options.words ? 'no-io' : 'is-visible');
-		if (options.words && reduced) splitWords(node);
-		return {};
-	}
-
 	if (options.words) {
 		node.setAttribute('data-words', '');
 		splitWords(node);
 	} else {
 		node.classList.add('reveal');
+	}
+
+	if (reduced || !('IntersectionObserver' in window)) {
+		// Words mode: .no-io reveals .rw children via CSS; plain mode: .is-visible reveals .reveal.
+		node.classList.add(options.words ? 'no-io' : 'is-visible');
+		return {};
 	}
 
 	if (options.delay) {
