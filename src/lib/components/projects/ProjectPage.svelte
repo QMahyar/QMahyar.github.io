@@ -13,19 +13,25 @@
 	let { page }: { page: ProjectPage } = $props();
 
 	let copiedStep = $state<string | null>(null);
+	let copyTimer: ReturnType<typeof setTimeout> | undefined;
 
 	async function copyStep(step: Quickstep) {
+		clearTimeout(copyTimer);
 		try {
 			await navigator.clipboard.writeText(step.code);
 			copiedStep = step.title;
 			await tick();
-			setTimeout(() => {
+			copyTimer = setTimeout(() => {
 				copiedStep = null;
 			}, 1400);
 		} catch {
 			// Clipboard API unavailable — silently ignore
 		}
 	}
+
+	$effect(() => {
+		return () => clearTimeout(copyTimer);
+	});
 </script>
 
 <SubHero {page} />

@@ -5,19 +5,25 @@
 	let { page }: { page: ProjectPage } = $props();
 
 	let copied = $state(false);
+	let copyTimer: ReturnType<typeof setTimeout> | undefined;
 
 	async function copyHint() {
+		clearTimeout(copyTimer);
 		try {
 			await navigator.clipboard.writeText(page.installHint);
 			copied = true;
 			await tick();
-			setTimeout(() => {
+			copyTimer = setTimeout(() => {
 				copied = false;
 			}, 1400);
 		} catch {
 			// Clipboard API unavailable — silently ignore
 		}
 	}
+
+	$effect(() => {
+		return () => clearTimeout(copyTimer);
+	});
 </script>
 
 <section class="relative flex flex-col overflow-hidden">

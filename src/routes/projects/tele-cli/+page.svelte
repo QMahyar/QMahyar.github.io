@@ -28,10 +28,14 @@
 	<meta property="og:description" content={page.seo.description} />
 	<meta property="og:url" content="https://qmahyar.github.io/projects/tele-cli" />
 	<meta property="og:image" content="https://qmahyar.github.io/og.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="tele-cli — Telegram from the terminal, with a cyan network motif." />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={page.seo.title} />
 	<meta name="twitter:description" content={page.seo.description} />
 	<meta name="twitter:image" content="https://qmahyar.github.io/og.png" />
+	<meta name="twitter:image:alt" content="tele-cli — Telegram from the terminal, with a cyan network motif." />
 	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}<\/script>`}
 </svelte:head>
 

@@ -42,7 +42,7 @@
 					{project.lang}
 				</span>
 			</span>
-			<span class="ml-11 line-clamp-2 text-sm leading-snug text-dim sm:ml-0 sm:min-w-0 sm:flex-1 sm:truncate sm:line-clamp-1">
+			<span class="ml-11 line-clamp-2 text-sm leading-snug text-dim sm:ml-0 sm:min-w-0 sm:flex-1 sm:line-clamp-1">
 				{project.description}
 			</span>
 			<span class="machine ml-auto hidden shrink-0 items-center gap-2 text-xs text-dim sm:inline-flex">
@@ -70,12 +70,12 @@
 					<Glyph seed={project.name} size={32} class="shrink-0" />
 					{project.name}
 				</h3>
-				<span class="machine inline-flex shrink-0 items-center gap-1.5 text-xs text-dim" aria-label={typeof project.stars === 'number' ? `${project.stars} stars` : undefined}>
-					{#if typeof project.stars === 'number'}
+				{#if typeof project.stars === 'number'}
+					<span class="machine inline-flex shrink-0 items-center gap-1.5 text-xs text-dim" role="img" aria-label="{project.stars} stars">
 						<Star size={12} aria-hidden="true" />
 						<span aria-hidden="true">{project.stars}</span>
-					{/if}
-				</span>
+					</span>
+				{/if}
 			</div>
 			<p class="mt-2 text-sm leading-relaxed">{project.description}</p>
 			<p class="machine mt-3 inline-flex items-center gap-2 text-xs text-dim">

@@ -35,6 +35,26 @@ function splitWords(node: HTMLElement): HTMLElement[] {
 	return spans;
 }
 
+let sharedObserver: IntersectionObserver | null = null;
+
+/** Lazily-created singleton observer; callbacks disconnect per-node on reveal. */
+function getSharedObserver(): IntersectionObserver {
+	if (!sharedObserver) {
+		sharedObserver = new IntersectionObserver(
+			(entries, observer) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						(entry.target as HTMLElement).classList.add('is-visible');
+						observer.unobserve(entry.target);
+					}
+				}
+			},
+			{ threshold: 0.12, rootMargin: '0px 0px -48px 0px' }
+		);
+	}
+	return sharedObserver;
+}
+
 export function reveal(node: HTMLElement, options: RevealOptions = {}) {
 	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -55,23 +75,14 @@ export function reveal(node: HTMLElement, options: RevealOptions = {}) {
 		node.style.transitionDelay = `${options.delay}ms`;
 	}
 
-	const io = new IntersectionObserver(
-		(entries) => {
-			for (const entry of entries) {
-				if (entry.isIntersecting) {
-					node.classList.add('is-visible');
-					io.disconnect();
-				}
-			}
-		},
-		{ threshold: 0.12, rootMargin: '0px 0px -48px 0px' }
-	);
-
+	// One shared observer across all reveal instances — dozens of
+	// use:reveal nodes must not each cost an IntersectionObserver.
+	const io = getSharedObserver();
 	io.observe(node);
 
 	return {
 		destroy() {
-			io.disconnect();
+			io.unobserve(node);
 		}
 	};
 }

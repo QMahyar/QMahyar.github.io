@@ -22,17 +22,28 @@
 	} = $props();
 
 	let copiedKey = $state<string | null>(null);
+	let copyTimer: ReturnType<typeof setTimeout> | undefined;
 
 	async function copySpec(projectName: string, key: string, value: string) {
+		clearTimeout(copyTimer);
 		try {
 			await navigator.clipboard.writeText(`${key}: ${value}`);
 			copiedKey = `${projectName}:${key}`;
 			await tick();
-			setTimeout(() => { copiedKey = null; }, 1400);
+			copyTimer = setTimeout(() => {
+				copiedKey = null;
+			}, 1400);
 		} catch {
-			// Clipboard API unavailable — silently ignore
+			copiedKey = 'error';
+			copyTimer = setTimeout(() => {
+				copiedKey = null;
+			}, 1400);
 		}
 	}
+
+	$effect(() => {
+		return () => clearTimeout(copyTimer);
+	});
 
 	function isCopied(projectName: string, key: string): boolean {
 		return copiedKey === `${projectName}:${key}`;
@@ -75,7 +86,7 @@
 						<p class="mt-5 max-w-md leading-relaxed">{project.description}</p>
 						<div class="mt-7 flex flex-wrap gap-x-8 gap-y-3">
 							{#if project.slug}
-								<a href="/projects/{project.slug}" class="link-arrow machine text-sm">
+								<a href="/projects/{project.slug}" class="link-arrow machine inline-flex min-h-11 items-center text-sm">
 									deep-dive <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 								</a>
 							{/if}
@@ -83,7 +94,7 @@
 								href={project.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								class="link-arrow machine text-sm"
+								class="link-arrow machine inline-flex min-h-11 items-center text-sm"
 							>
 								view repo <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 							</a>
@@ -105,7 +116,6 @@
 										type="button"
 										class="spec-row flex w-full cursor-pointer flex-col gap-1 py-2.5 text-left sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 {copied ? 'spec-copied' : ''}"
 										onclick={() => copySpec(project.name, row.key, row.value)}
-										title="Click to copy {row.key}: {row.value}"
 										aria-label="Copy {row.key}: {row.value}"
 									>
 										<span class="machine text-[13px] text-dim">{row.key}</span>

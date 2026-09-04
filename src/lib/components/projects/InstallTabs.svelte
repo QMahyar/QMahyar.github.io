@@ -7,16 +7,19 @@
 
 	let activeId = $state<string | null>(null);
 	let copied = $state(false);
+	let copyTimer: ReturnType<typeof setTimeout> | undefined;
 
-	const active = $derived.by(() => tabs.find((t) => t.id === activeId) ?? tabs[0]);
+	const active = $derived.by(() => tabs.find((t) => t.id === (activeId ?? tabs[0]?.id)) ?? tabs[0]);
+	const activeKey = $derived(active?.id ?? tabs[0]?.id ?? '');
 
 	async function copyCode() {
 		if (!active) return;
+		clearTimeout(copyTimer);
 		try {
 			await navigator.clipboard.writeText(active.code);
 			copied = true;
 			await tick();
-			setTimeout(() => {
+			copyTimer = setTimeout(() => {
 				copied = false;
 			}, 1400);
 		} catch {
@@ -25,8 +28,24 @@
 	}
 
 	function select(id: string) {
+		clearTimeout(copyTimer);
 		activeId = id;
 		copied = false;
+	}
+
+	$effect(() => {
+		return () => clearTimeout(copyTimer);
+	});
+
+	function onTabKey(e: KeyboardEvent, id: string) {
+		if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+		e.preventDefault();
+		const i = tabs.findIndex((t) => t.id === id);
+		const d = e.key === 'ArrowRight' ? 1 : -1;
+		const next = tabs[(i + d + tabs.length) % tabs.length];
+		select(next.id);
+		const list = (e.currentTarget as HTMLElement).closest('[role="tablist"]');
+		list?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[tabs.findIndex((t) => t.id === next.id)]?.focus();
 	}
 </script>
 
@@ -36,10 +55,13 @@
 			<button
 				type="button"
 				role="tab"
-				aria-selected={tab.id === activeId}
+				id="install-tab-{tab.id}"
+				aria-selected={tab.id === activeKey}
 				aria-controls="install-panel"
+				tabindex={tab.id === activeKey ? 0 : -1}
 				onclick={() => select(tab.id)}
-				class="machine inline-flex min-h-11 items-center border-b pb-1 text-sm transition-colors duration-150 {tab.id === activeId
+				onkeydown={(e) => onTabKey(e, tab.id)}
+				class="machine inline-flex min-h-11 items-center border-b pb-1 text-sm transition-colors duration-150 {tab.id === activeKey
 					? 'border-glow text-fog'
 					: 'border-transparent text-dim hover:text-fog'}"
 			>
@@ -49,7 +71,7 @@
 	</div>
 
 	{#if active}
-		<div id="install-panel" role="tabpanel" class="term mt-6">
+		<div id="install-panel" role="tabpanel" aria-labelledby="install-tab-{active.id}" tabindex="0" class="term mt-6">
 			<div class="flex items-center justify-between gap-4">
 				<p class="term-label mb-0">{active.title}</p>
 				<button

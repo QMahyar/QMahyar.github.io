@@ -28,7 +28,7 @@ export const cfScannerPage: ProjectPage = {
 			id: 'source',
 			label: 'source',
 			title: 'Build from source',
-			code: 'cargo build --release\ncargo run -- scan --mode cdn --preset quick',
+			code: 'git clone https://github.com/QMahyar/cf-scanner.git\ncd cf-scanner\ncargo build --release\ncargo run -- scan --mode cdn --preset quick',
 			note: 'Rust 2024 toolchain; first build needs network for GeoIP, or CFSCANNER_OFFLINE_BUILD=1.'
 		}
 	],

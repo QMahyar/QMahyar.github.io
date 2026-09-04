@@ -35,8 +35,9 @@ export const flagships: Flagship[] = [
 		description:
 			'Drive real Telegram user accounts from the terminal — messages, chats, groups, contacts, live streaming. Name your accounts, fan commands out across all of them, get tables for humans or JSON for machines. Pure Rust on grammers, zero C dependencies.',
 		lang: 'Rust',
+		stars: 1,
 		tags: ['MTProto', 'grammers', 'multi-account'],
-		updated: 'Aug 2026',
+		updated: 'Sep 2026',
 		spec: [
 			{ key: 'accounts', value: 'real users, named' },
 			{ key: 'commands', value: 'fanned across all' },
@@ -54,7 +55,7 @@ export const flagships: Flagship[] = [
 		lang: 'Rust',
 		stars: 1,
 		tags: ['WARP', 'WireGuard', 'boringtun'],
-		updated: 'Aug 2026',
+		updated: 'Sep 2026',
 		spec: [
 			{ key: 'binary', value: 'one · cross-platform' },
 			{ key: 'tls scan', value: 'official ranges' },
@@ -67,11 +68,22 @@ export const flagships: Flagship[] = [
 
 export const projects: Project[] = [
 	{
+		name: 'q-proxy',
+		url: 'https://github.com/QMahyar/q-proxy',
+		description:
+			'Self-hosted Cloudflare Worker proxy panel — VLESS, VMess, Trojan, Shadowsocks over WebSocket with subs for every major client and WARP configs. One file, bilingual EN/FA.',
+		lang: 'TypeScript',
+		stars: 1,
+		tags: ['Cloudflare Workers', 'VLESS'],
+		updated: 'Sep 2026'
+	},
+	{
 		name: 'warp-generator',
 		url: 'https://github.com/QMahyar/warp-generator',
 		description:
 			'Open-source Cloudflare WARP configuration generator — WireGuard, AmneziaWG, Clash, Throne, Nekoray, Husi, Karing, WireSock.',
 		lang: 'JavaScript',
+		stars: 1,
 		tags: ['WireGuard', 'AmneziaWG'],
 		updated: 'Aug 2026'
 	},
@@ -81,7 +93,7 @@ export const projects: Project[] = [
 		description:
 			'Telegram Werewolf, automated — multi-account management, phase detection, and action automation for desktop and headless servers.',
 		lang: 'TypeScript',
-		stars: 1,
+		stars: 2,
 		tags: ['Electron', 'Automation'],
 		updated: 'Aug 2026'
 	},
@@ -94,25 +106,56 @@ export const projects: Project[] = [
 		stars: 3,
 		tags: ['pi extension', 'LLM gateway'],
 		updated: 'Aug 2026'
-	},
+	}
+];
+
+export const moreProjects: Project[] = [
 	{
 		name: 'pi-exa-search',
 		url: 'https://github.com/QMahyar/pi-exa-search',
 		description:
 			'Exa neural web search and page fetch for pi — multi-key rotation with highlights extracted from results.',
 		lang: 'TypeScript',
-		tags: ['pi extension', 'web search'],
+		stars: 1,
+		tags: [],
 		updated: 'Aug 2026'
-	}
-];
-
-export const moreProjects: Project[] = [
+	},
+	{
+		name: 'QShot',
+		url: 'https://github.com/QMahyar/QShot',
+		description: 'Fast, trim screenshot tool — capture, annotate, share. Rust 2024 + Tauri 2 + Svelte 5.',
+		lang: 'Svelte',
+		stars: 1,
+		tags: [],
+		updated: 'Aug 2026'
+	},
+	{
+		name: 'skills',
+		url: 'https://github.com/QMahyar/skills',
+		description:
+			'154 engineering workflow skills for AI coding agents — install with npx skills add QMahyar/skills.',
+		lang: 'JavaScript',
+		stars: 1,
+		tags: [],
+		updated: 'Aug 2026'
+	},
+	{
+		name: 'readme-creator',
+		url: 'https://github.com/QMahyar/readme-creator',
+		description:
+			'Create, refactor, and improve README files — banners, screenshots, and docs for users, developers, and AI agents.',
+		lang: 'Python',
+		stars: 1,
+		tags: [],
+		updated: 'Aug 2026'
+	},
 	{
 		name: 'pi-ask',
 		url: 'https://github.com/QMahyar/pi-ask',
 		description:
 			'Structured choice and text forms for agent-user decisions. ask_user extension for the pi coding agent.',
 		lang: 'TypeScript',
+		stars: 1,
 		tags: [],
 		updated: 'Aug 2026'
 	},
@@ -122,26 +165,17 @@ export const moreProjects: Project[] = [
 		description:
 			'Local-first Telegram session manager for your own accounts — guarded multi-account actions on local Telethon sessions.',
 		lang: 'TypeScript',
-		stars: 1,
+		stars: 2,
 		tags: [],
 		archived: true,
 		updated: 'Jul 2026'
-	},
-	{
-		name: 'pi-termux',
-		url: 'https://github.com/QMahyar/pi-termux',
-		description: 'Pi agent skill for Termux extra keys — layout configs, reference, macros.',
-		lang: 'Other',
-		stars: 1,
-		tags: [],
-		updated: 'Jun 2026'
 	},
 	{
 		name: 'wezterm-config',
 		url: 'https://github.com/QMahyar/wezterm-config',
 		description: 'Personal WezTerm configuration for Windows — the palette behind this site.',
 		lang: 'Lua',
-		stars: 2,
+		stars: 3,
 		tags: [],
 		updated: 'Feb 2026'
 	}
@@ -155,6 +189,7 @@ export const langColor: Record<string, string> = {
 	JavaScript: '#f1e05a',
 	Lua: '#7b7beb',
 	Python: '#4b8bbe',
+	Svelte: '#ff3e00',
 	Other: '#8a8a8a'
 };
 
@@ -176,7 +211,6 @@ export const stack = [
 		items: [
 			{ name: 'Svelte 5', note: 'runes-first UI' },
 			{ name: 'Tailwind CSS v4', note: 'utility styling' },
-			{ name: 'Skeleton UI', note: 'components' },
 			{ name: 'Vite', note: 'build & dev server' }
 		]
 	},
@@ -193,7 +227,7 @@ export const stack = [
 ] as const;
 
 export const stats = [
-	{ value: '16', label: 'public repos' },
-	{ value: '\u221e', label: 'ports pending' },
+	{ value: '19', label: 'public repos' },
+	{ value: '22', label: 'stars earned' },
 	{ value: '2026', label: 'still shipping' }
 ] as const;

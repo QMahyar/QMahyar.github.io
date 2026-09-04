@@ -23,15 +23,15 @@ $effect(() => {
 
 <!-- N9 · edge-aligned minimal — wordmark hard-left, one CTA hard-right, the space is the design -->
 <header
-	class="fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300 {scrolled
-		? 'border-transparent bg-void/85 backdrop-blur-md'
-		: 'border-transparent'}"
+	class="fixed inset-x-0 top-0 z-40 border-b border-transparent transition-colors duration-300 {scrolled
+		? 'bg-void/85 backdrop-blur-md'
+		: ''}"
 >
 	<nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6" aria-label="Main">
-		<a href="/" class="machine shrink-0 text-lg font-semibold tracking-tight text-fog">
-			Q<span class="text-glow">_</span>
+		<a href="/" aria-label="Mahyar — home" class="machine shrink-0 text-lg font-semibold tracking-tight text-fog">
+			<span aria-hidden="true">Q<span class="text-glow">_</span></span>
 		</a>
-		<ul class="flex items-center gap-2.5 sm:gap-4 md:gap-6" aria-label="Sections">
+		<ul class="flex items-center gap-2.5 sm:gap-4 md:gap-6">
 			<li>
 				<a href="/projects" aria-current={onProjects ? 'page' : undefined} class="inline-flex min-h-11 items-center machine text-xs tracking-wide transition-colors duration-150 hover:text-fog sm:text-sm {onProjects ? 'text-fog' : 'text-dim'}">projects</a>
 			</li>
@@ -46,7 +46,7 @@ $effect(() => {
 			href={profile.telegram}
 			target="_blank"
 			rel="noopener noreferrer"
-			class="link-arrow machine shrink-0 text-xs min-h-11 items-center sm:text-sm"
+			class="link-arrow machine inline-flex min-h-11 shrink-0 items-center text-xs sm:text-sm"
 		>
 			<span class="max-[374px]:hidden">say hello</span><span class="hidden max-[374px]:inline">hi</span> <span class="arr arr-ne" aria-hidden="true">&nearr;</span>
 		</a>

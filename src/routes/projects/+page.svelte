@@ -26,6 +26,9 @@
 	/>
 	<meta property="og:url" content="https://qmahyar.github.io/projects" />
 	<meta property="og:image" content="https://qmahyar.github.io/og.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Mahyar — developer and security enthusiast, with a cyan network motif." />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Projects — Mahyar" />
 	<meta
@@ -33,6 +36,7 @@
 		content="Flagship deep-dives for tele-cli and cf-scanner, plus every smaller tool and extension."
 	/>
 	<meta name="twitter:image" content="https://qmahyar.github.io/og.png" />
+	<meta name="twitter:image:alt" content="Mahyar — developer and security enthusiast, with a cyan network motif." />
 </svelte:head>
 
 <section class="relative flex flex-col overflow-hidden">
@@ -163,7 +167,7 @@
 				queued from the long tail
 			</p>
 			<ul class="mt-6 grid gap-6 sm:grid-cols-3">
-				{#each [{ name: 'q-proxy', blurb: 'Self-hosted Cloudflare Worker proxy panel — subs for every client, WARP configs.', href: 'https://github.com/QMahyar/q-proxy' }, { name: 'warp-generator', blurb: 'Private WARP subscriptions, self-hosted on Cloudflare — no VPS, no domain.', href: 'https://github.com/QMahyar/warp-generator' }, { name: 'QShot', blurb: 'Fast, trim screenshot tool — capture, annotate, share.', href: 'https://github.com/QMahyar/QShot' }] as item, i (item.name)}
+				{#each [{ name: 'q-proxy', blurb: 'Self-hosted Cloudflare Worker proxy panel — VLESS, VMess, Trojan, Shadowsocks with subs for every client.', href: 'https://github.com/QMahyar/q-proxy' }, { name: 'skills', blurb: '154 engineering workflow skills for AI coding agents.', href: 'https://github.com/QMahyar/skills' }, { name: 'QShot', blurb: 'Fast, trim screenshot tool — capture, annotate, share.', href: 'https://github.com/QMahyar/QShot' }] as item, i (item.name)}
 					<li
 						class="surface spot min-w-0 p-6"
 						use:reveal={{ delay: i * 60 }}

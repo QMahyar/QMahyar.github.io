@@ -4,7 +4,7 @@
 
 	const command = 'mahyar --rust --telegram --network-tooling';
 	let typed = $state('');
-	let periodEl: HTMLElement;
+	let periodEl: HTMLElement | undefined;
 
 	$effect(() => {
 		if (!periodEl) return;
@@ -71,7 +71,7 @@
 			</p>
 
 			<div class="enter mt-10 flex flex-wrap items-center gap-x-8 gap-y-4" style="--i: 3">
-				<a href="#projects" class="link-arrow inline-flex min-h-11 items-center">
+				<a href="/#projects" class="link-arrow inline-flex min-h-11 items-center">
 					Browse projects <span class="arr arr-d" aria-hidden="true">&darr;</span>
 				</a>
 				<a
