@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run check && vite build",
+    "build": "svelte-kit sync && npm run check && vite build",
     "preview": "vite preview",
     "og": "node scripts/og.mjs",
     "check": "svelte-check --tsconfig ./tsconfig.json"
