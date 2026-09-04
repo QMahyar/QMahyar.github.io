@@ -8,13 +8,13 @@ export const teleCliPage: ProjectPage = {
 	lang: 'Rust',
 	updated: 'Aug 2026',
 	badges: ['pure rust', 'grammers', '16 command groups', 'json-first'],
-	installHint: 'npm install -g @qmahyar/tele',
+	installHint: 'npm install -g @qmahyar/telecli',
 	install: [
 		{
 			id: 'npm',
 			label: 'npm',
 			title: 'Install with npm',
-			code: 'npm install -g @qmahyar/tele'
+			code: 'npm install -g @qmahyar/telecli'
 		},
 		{
 			id: 'binary',

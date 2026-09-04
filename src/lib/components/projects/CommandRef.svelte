@@ -8,6 +8,7 @@
 
 	let query = $state('');
 	let copiedLine = $state<string | null>(null);
+	let copyTimer: ReturnType<typeof setTimeout> | undefined;
 
 	const filtered = $derived.by(() => {
 		const q = query.trim().toLowerCase();
@@ -24,17 +25,22 @@
 	const totalCount = $derived(groups.reduce((n, g) => n + g.lines.length, 0));
 
 	async function copyLine(line: string) {
+		clearTimeout(copyTimer);
 		try {
 			await navigator.clipboard.writeText(line);
 			copiedLine = line;
 			await tick();
-			setTimeout(() => {
+			copyTimer = setTimeout(() => {
 				copiedLine = null;
 			}, 1400);
 		} catch {
 			// Clipboard API unavailable — silently ignore
 		}
 	}
+
+	$effect(() => {
+		return () => clearTimeout(copyTimer);
+	});
 </script>
 
 <div use:reveal>

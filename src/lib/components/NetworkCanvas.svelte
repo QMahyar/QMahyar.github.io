@@ -142,16 +142,23 @@
 		}
 
 		function drawLinks(pairs: Array<[number, number, number]>, staticFrame: boolean) {
+			g.lineWidth = 1;
+			// Bucket links into 3 alpha bands so each band strokes in one path.
+			const bands: Array<Array<[number, number]>> = [[], [], []];
 			for (const [a, b, d2] of pairs) {
-				const na = nodes[a];
-				const nb = nodes[b];
 				const dist = Math.sqrt(d2);
-				const alpha = (1 - dist / LINK_DIST) * (staticFrame ? 0.28 : 0.22);
-				g.strokeStyle = rgba(BEAM, alpha);
-				g.lineWidth = 1;
+				const t = 1 - dist / LINK_DIST;
+				bands[t > 0.66 ? 0 : t > 0.33 ? 1 : 2].push([a, b]);
+			}
+			const base = staticFrame ? 0.28 : 0.22;
+			for (let i = 0; i < 3; i++) {
+				if (bands[i].length === 0) continue;
+				g.strokeStyle = rgba(BEAM, base * (1 - i * 0.3));
 				g.beginPath();
-				g.moveTo(na.x, na.y);
-				g.lineTo(nb.x, nb.y);
+				for (const [a, b] of bands[i]) {
+					g.moveTo(nodes[a].x, nodes[a].y);
+					g.lineTo(nodes[b].x, nodes[b].y);
+				}
 				g.stroke();
 			}
 		}
@@ -281,6 +288,7 @@
 
 		const onResize = () => resize();
 		const onMove = (e: PointerEvent) => {
+			if (!inView || !running) return;
 			const rect = canvas.getBoundingClientRect();
 			mouse.x = e.clientX - rect.left;
 			mouse.y = e.clientY - rect.top;
@@ -299,7 +307,12 @@
 		};
 
 		const coarse = window.matchMedia('(pointer: coarse)').matches;
-		window.addEventListener('resize', onResize);
+		let resizeTimer: ReturnType<typeof setTimeout>;
+		const onResizeDebounced = () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(onResize, 150);
+		};
+		window.addEventListener('resize', onResizeDebounced);
 		if (!coarse) window.addEventListener('pointermove', onMove, { passive: true });
 		document.documentElement.addEventListener('mouseleave', onLeave);
 		window.addEventListener('blur', onLeave);
@@ -315,7 +328,8 @@
 		return () => {
 			stop();
 			io.disconnect();
-			window.removeEventListener('resize', onResize);
+			clearTimeout(resizeTimer);
+			window.removeEventListener('resize', onResizeDebounced);
 			if (!coarse) window.removeEventListener('pointermove', onMove);
 			document.documentElement.removeEventListener('mouseleave', onLeave);
 			window.removeEventListener('blur', onLeave);

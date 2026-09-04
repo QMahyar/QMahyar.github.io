@@ -9,7 +9,8 @@ const config = {
 		adapter: adapter({
 			pages: 'dist',
 			assets: 'dist',
-			fallback: '404.html'
+			fallback: '404.html',
+			strict: true
 		})
 	}
 };

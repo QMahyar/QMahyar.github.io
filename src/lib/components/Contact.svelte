@@ -6,7 +6,7 @@
 		{ label: 'telegram', value: 't.me/QMahyar', href: profile.telegram },
 		{ label: 'github', value: 'QMahyar', href: profile.github },
 		{ label: 'x / twitter', value: profile.handle, href: profile.twitter },
-		{ label: 'email', value: 'mahyartdb@gmail.com', href: profile.email }
+		{ label: 'email', value: profile.email.replace('mailto:', ''), href: profile.email }
 	];
 </script>
 
@@ -58,7 +58,7 @@
 			use:reveal
 		>
 			<p>&copy; {new Date().getFullYear()} Mahyar</p>
-			<a href="#top" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-glow">back to top &uarr;</a>
+			<a href="#main" class="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-glow">back to top &uarr;</a>
 		</div>
 	</div>
 </footer>
